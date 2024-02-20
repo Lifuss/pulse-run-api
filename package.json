@@ -1,0 +1,38 @@
+{
+  "name": "pulse-run-api",
+  "version": "1.0.0",
+  "description": "Rest API for online shop",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lifuss/pulse-run-api.git"
+  },
+  "author": "Arsen Hryhoriak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lifuss/pulse-run-api/issues"
+  },
+  "homepage": "https://github.com/Lifuss/pulse-run-api#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "joi": "^17.12.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.1.3",
+    "swagger-ui-express": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3",
+    "eslint": "^7.19.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "16.0.3",
+    "eslint-plugin-import": "2.25.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "5.2.0"
+  }
+}
