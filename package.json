@@ -2,10 +2,10 @@
   "name": "pulse-run-api",
   "version": "1.0.0",
   "description": "Rest API for online shop",
-  "main": "server.ts",
+  "main": "dist/server.js",
   "scripts": {
     "build": "tsc",
-    "start": "cross-env NODE_ENV=production node ./dist/server.js",
+    "start": "npm run build && cross-env NODE_ENV=production node ./dist/server.js",
     "start:dev": "cross-env NODE_ENV=development nodemon --exec ts-node ./server.ts",
     "lint": "eslint . --ext ts --report-unused-disable-directives --max-warnings 0"
   },
