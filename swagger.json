@@ -6,6 +6,9 @@
   },
   "servers": [
     {
+      "url": "https://pulse-run-api.onrender.com/api"
+    },
+    {
       "url": "http://localhost:3020/api"
     }
   ],
@@ -88,7 +91,7 @@
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "content": {
               "application/json": {
                 "schema": {
@@ -99,7 +102,42 @@
             "description": "Success"
           },
           "400": {
+            "description": "Bad Request"
+          },
+          "409": {
             "description": "Bad Request (User already exists)"
+          }
+        }
+      }
+    },
+    "/auth/signout": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "(in development)Logout",
+        "responses": {
+          "200": {
+            "description": "Success "
+          }
+        }
+      }
+    },
+    "/auth/current": {
+      "get": {
+        "tags": ["Auth"],
+        "summary": "(in development)Get current user",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         }
       }
