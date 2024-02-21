@@ -1,9 +1,17 @@
-import Joi from "joi";
+import Joi from 'joi';
 
 export const schemaSignup = Joi.object({
   email: Joi.string()
-    .email({ minDomainSegments: 2, tlds: { allow: ["com", "net", "ua"] } })
+    .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'ua'] } })
     .required(),
   password: Joi.string().min(8).max(16).required(),
   name: Joi.string().required(),
+  lastName: Joi.string().required(),
+});
+
+export const schemaSignIn = Joi.object({
+  email: Joi.string()
+    .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'ua'] } })
+    .required(),
+  password: Joi.string().min(8).max(16).required(),
 });
