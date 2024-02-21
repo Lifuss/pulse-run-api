@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken';
 import { Request, Response } from 'express';
 import User from '../../models/user';
 import ctrlWrapper from '../../utils/ctrlWrapper';
@@ -19,7 +20,13 @@ const signup = async (req: Request, res: Response) => {
       lastName,
     },
   });
-  res.status(201).json({ user: newUser });
+
+  const payload = {
+    id: newUser._id,
+  };
+  const secretKey: string = process.env.JWT_SECRET || 'default_secret';
+  const token = jwt.sign(payload, secretKey, { expiresIn: '24h' });
+  res.status(201).json({ token, user: { ...newUser.profile, email } });
 };
 
 export default ctrlWrapper(signup);

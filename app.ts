@@ -2,6 +2,8 @@ import express, { NextFunction, Request, Response } from 'express';
 import logger from 'morgan';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './swagger.json';
 
 import authRoutes from './routes/auth';
 import { RequestError } from './utils/requestError';
@@ -15,6 +17,8 @@ const formatLogger = app.get('env') === 'development' ? 'dev' : 'short';
 app.use(logger(formatLogger));
 app.use(cors());
 app.use(express.json());
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/api/auth', authRoutes);
 

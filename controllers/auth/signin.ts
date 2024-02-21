@@ -8,7 +8,7 @@ const signIn = async (req: Request, res: Response): Promise<void> => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   if (!user) {
-    res.status(400).json({ message: 'User not found' });
+    res.status(404).json({ message: 'User not found' });
     return;
   }
 
@@ -24,7 +24,7 @@ const signIn = async (req: Request, res: Response): Promise<void> => {
   const secretKey: string = process.env.JWT_SECRET || 'default_secret';
   const token = jwt.sign(payload, secretKey, { expiresIn: '24h' });
 
-  res.status(200).json({ token, user: user.profile });
+  res.status(200).json({ token, user: { ...user.profile, email } });
 };
 
 export default ctrlWrapper(signIn);
