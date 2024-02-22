@@ -26,6 +26,8 @@ const signup = async (req: Request, res: Response) => {
   };
   const secretKey: string = process.env.JWT_SECRET || 'default_secret';
   const token = jwt.sign(payload, secretKey, { expiresIn: '24h' });
+
+  await User.findByIdAndUpdate(newUser._id, { token });
   res.status(201).json({ token, user: { ...newUser.profile, email } });
 };
 

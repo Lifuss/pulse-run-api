@@ -24,6 +24,8 @@ const signIn = async (req: Request, res: Response): Promise<void> => {
   const secretKey: string = process.env.JWT_SECRET || 'default_secret';
   const token = jwt.sign(payload, secretKey, { expiresIn: '24h' });
 
+  await User.findByIdAndUpdate(user._id, { token });
+
   res.status(200).json({ token, user: { ...user.profile, email } });
 };
 

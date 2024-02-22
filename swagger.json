@@ -113,12 +113,33 @@
     "/auth/signout": {
       "post": {
         "tags": ["Auth"],
-        "summary": "(in development)Logout",
+        "summary": "Logout",
         "responses": {
           "200": {
-            "description": "Success "
+            "description": "Success ",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Signout success"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
       }
     },
     "/auth/current": {
@@ -169,6 +190,13 @@
             }
           }
         }
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }

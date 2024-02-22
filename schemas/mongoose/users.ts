@@ -15,6 +15,10 @@ const userSchema = new Schema(
       type: [String],
       default: ['user'],
     },
+    token: {
+      type: String,
+      default: null,
+    },
     profile: {
       firstName: {
         type: String,
