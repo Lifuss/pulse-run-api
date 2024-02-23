@@ -145,7 +145,7 @@
     "/auth/current": {
       "get": {
         "tags": ["Auth"],
-        "summary": "(in development)Get current user",
+        "summary": "Get current user",
         "responses": {
           "200": {
             "content": {
@@ -158,9 +158,14 @@
             "description": "Success"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized (Invalid or expired token)"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
       }
     }
   },
