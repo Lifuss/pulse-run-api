@@ -16,6 +16,14 @@
     {
       "name": "Auth",
       "description": "authentication"
+    },
+    {
+      "name": "User",
+      "description": "user management"
+    },
+    {
+      "name": "Products",
+      "description": "product management"
     }
   ],
   "paths": {
@@ -166,6 +174,54 @@
             "Bearer": []
           }
         ]
+      }
+    },
+    "/products/categories": {
+      "get": {
+        "tags": ["Products"],
+        "summary": "Get all categories",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "brands": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "Nike"
+                      }
+                    },
+                    "colors": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "Red"
+                      }
+                    },
+                    "sizes": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": 40
+                      }
+                    },
+                    "seasons": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "Winter"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          }
+        }
       }
     }
   },

@@ -6,6 +6,8 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from './swagger.json';
 
 import authRoutes from './routes/auth';
+import productsRouter from './routes/products';
+
 import { RequestError } from './utils/requestError';
 
 dotenv.config();
@@ -21,6 +23,7 @@ app.use(express.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/api/auth', authRoutes);
+app.use('/api/products', productsRouter);
 
 app.use((req: Request, res: Response) => {
   const error = new Error('Not Found');
