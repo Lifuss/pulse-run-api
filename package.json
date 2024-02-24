@@ -4,8 +4,8 @@
   "description": "Rest API for online shop",
   "main": "dist/server.js",
   "scripts": {
-    "build": "tsc",
-    "start": "npm run build && cross-env NODE_ENV=production node ./dist/server.js",
+    "build": "npm install && tsc",
+    "start": "cross-env NODE_ENV=production node ./dist/server.js",
     "start:dev": "cross-env NODE_ENV=development nodemon --exec ts-node ./server.ts",
     "lint": "eslint . --ext ts --report-unused-disable-directives --max-warnings 0"
   },
@@ -24,6 +24,7 @@
     "@types/jsonwebtoken": "^9.0.5",
     "@types/swagger-ui-express": "^4.1.6",
     "bcryptjs": "^2.4.3",
+    "cloudinary": "^2.0.1",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
