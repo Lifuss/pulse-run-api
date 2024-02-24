@@ -15,3 +15,9 @@ export const schemaSignIn = Joi.object({
     .required(),
   password: Joi.string().min(8).max(16).required(),
 });
+
+export const schemaSubscribe = Joi.object({
+  email: Joi.string()
+    .email({ minDomainSegments: 2, tlds: { deny: ['ru'] } })
+    .required(),
+});

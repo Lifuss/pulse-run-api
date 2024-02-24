@@ -13,7 +13,7 @@ export const productSchema = new Schema(
         required: true,
       },
       sale: {
-        type: number,
+        type: Number,
         required: true,
       },
       size: { type: Schema.Types.ObjectId, ref: 'Size', required: true },

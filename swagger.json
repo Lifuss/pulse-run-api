@@ -223,6 +223,51 @@
           }
         }
       }
+    },
+    "/users/subscribe": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Subscribe to newsletter",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": ["email"],
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Subscribed successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "409": {
+            "description": "Bad Request (User already subscribed)"
+          }
+        }
+      }
     }
   },
   "components": {
