@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { Brand, Color, Size } from '../../models/products';
 import ctrlWrapper from '../../utils/ctrlWrapper';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getNames = async (Model: any) => {
   const items = await Model.find({}, 'name');
   return items.map((item: { name: string }) => item.name);

@@ -3,15 +3,15 @@ module.exports = {
     es2021: true,
     node: true,
   },
-  extends: ["standard", "plugin:@typescript-eslint/recommended", "prettier"],
-  parser: "@typescript-eslint/parser",
+  extends: ['standard', 'plugin:@typescript-eslint/recommended', 'prettier'],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 12,
-    sourceType: "module",
-    project: "./tsconfig.json",
+    sourceType: 'module',
+    project: './tsconfig.json',
   },
-  plugins: ["@typescript-eslint"],
+  plugins: ['@typescript-eslint'],
   rules: {
-    "@typescript-eslint/no-unused-vars": ["error"],
+    '@typescript-eslint/no-unused-vars': ['error'],
   },
 };
