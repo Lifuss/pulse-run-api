@@ -1,11 +1,12 @@
 interface Messages {
   [key: number]: string;
 }
+
 export class RequestError extends Error {
   status: number;
 
   constructor(status: number, message?: string) {
-    super(message); // Pass the message to the Error constructor
+    super(message);
     this.status = status;
   }
 }

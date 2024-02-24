@@ -1,21 +1,30 @@
+import { number } from 'joi';
 import { Schema } from 'mongoose';
 
-export const productSchema = new Schema({
-  name: String,
-  price: Number,
-  category: {
-    season: {
-      type: String,
-      enum: ['winter', 'summer', 'all-season'],
-      required: true,
+export const productSchema = new Schema(
+  {
+    name: String,
+    price: Number,
+    category: {
+      // TODO: Добавити категорію стать
+      season: {
+        type: String,
+        enum: ['winter', 'summer', 'all-season'],
+        required: true,
+      },
+      sale: {
+        type: number,
+        required: true,
+      },
+      size: { type: Schema.Types.ObjectId, ref: 'Size', required: true },
+      brand: { type: Schema.Types.ObjectId, ref: 'Brand', required: true },
+      color: { type: Schema.Types.ObjectId, ref: 'Color', required: true },
     },
-    size: { type: Schema.Types.ObjectId, ref: 'Size', required: true },
-    brand: { type: Schema.Types.ObjectId, ref: 'Brand', required: true },
-    color: { type: Schema.Types.ObjectId, ref: 'Color', required: true },
+    description: String,
+    imgThumbnail: String,
   },
-  description: String,
-  imgThumbnail: String,
-});
+  { timestamps: true },
+);
 
 export const sizeSchema = new Schema({
   name: {

@@ -1,7 +1,7 @@
 import app from './app';
 import mongoose from 'mongoose';
 
-const port = process.env.PORT || 3002;
+const port = process.env.PORT || 3003;
 
 mongoose.set('strictQuery', false);
 
