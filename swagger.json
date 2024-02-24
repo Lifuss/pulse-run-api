@@ -260,11 +260,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request"
-          },
           "409": {
-            "description": "Bad Request (User already subscribed)"
+            "description": "Conflict (User already subscribed)"
           }
         }
       }
