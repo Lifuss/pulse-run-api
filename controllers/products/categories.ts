@@ -19,7 +19,6 @@ const categories = async (req: Request, res: Response) => {
     sizes: sizeNames,
     seasons: ['winter', 'summer', 'all-season'],
   });
-  return;
 };
 
 export default ctrlWrapper(categories);
