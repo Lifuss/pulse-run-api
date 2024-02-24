@@ -20,8 +20,7 @@ const subscribeEmail = async (req: Request, res: Response) => {
 
     res.status(201).json({ message: 'Email has been sent successfully!' });
   }
-  res.status(400).json({ message: 'User with that email already subscribed!' });
-  return;
+  res.status(409).json({ message: 'User with that email already subscribed!' });
 };
 
 export default ctrlWrapper(subscribeEmail);

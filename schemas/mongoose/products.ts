@@ -1,4 +1,3 @@
-import { number } from 'joi';
 import { Schema } from 'mongoose';
 
 export const productSchema = new Schema(
