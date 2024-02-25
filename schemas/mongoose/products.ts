@@ -4,7 +4,7 @@ export const productSchema = new Schema(
   {
     name: String,
     price: Number,
-    sale: Number,
+    sale: { type: Number, default: 0 },
     description: String,
     imgThumbnail: String,
     imgGallery: [String],

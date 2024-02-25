@@ -224,6 +224,112 @@
         }
       }
     },
+    "/products/create": {
+      "post": {
+        "tags": ["Products"],
+        "summary": "Create a product",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "name",
+                  "description",
+                  "price",
+                  "category",
+                  "brand",
+                  "color",
+                  "size",
+                  "season",
+                  "image",
+                  "features[0]",
+                  "sex",
+                  "imgThumbnail",
+                  "imgGallery"
+                ],
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "price": {
+                    "type": "number"
+                  },
+                  "sale": { "type": "number" },
+                  "category": {
+                    "type": "string"
+                  },
+                  "features[0]": {
+                    "type": "string"
+                  },
+                  "features[1]": {
+                    "type": "string"
+                  },
+                  "features[2]": {
+                    "type": "string"
+                  },
+                  "brand": {
+                    "type": "string"
+                  },
+                  "color": {
+                    "type": "string"
+                  },
+                  "size": {
+                    "type": "number"
+                  },
+                  "season": {
+                    "type": "string"
+                  },
+                  "sex": {
+                    "type": "string"
+                  },
+                  "imgThumbnail": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "imgGallery": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Product created successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
     "/users/subscribe": {
       "post": {
         "tags": ["User"],
@@ -293,13 +399,70 @@
             }
           }
         }
-      }
-    },
-    "securitySchemes": {
-      "Bearer": {
-        "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT"
+      },
+      "Product": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "sale": { "type": "number" },
+          "category": {
+            "type": "string"
+          },
+          "features": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "categories": {
+            "type": "object",
+            "properties": {
+              "brands": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "Nike"
+                }
+              },
+              "colors": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "Red"
+                }
+              },
+              "sizes": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": 40
+                }
+              },
+              "seasons": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "Winter"
+                }
+              }
+            }
+          }
+        }
+      },
+      "securitySchemes": {
+        "Bearer": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
       }
     }
   }

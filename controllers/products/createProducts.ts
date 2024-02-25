@@ -25,7 +25,9 @@ const createProducts = async (req: Request, res: Response) => {
     !('imgThumbnail' in req.files) ||
     !('imgGallery' in req.files)
   ) {
-    res.status(400).send('Missing files');
+    res
+      .status(400)
+      .send('Missing files (немає картинки в imgGallery або в imgThumbnail)');
     return;
   }
   const thumbnailPath = req.files.imgThumbnail[0].path;
