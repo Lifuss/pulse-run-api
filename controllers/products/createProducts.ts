@@ -81,7 +81,8 @@ const createProducts = async (req: Request, res: Response) => {
       brand: checkBrand?._id,
     },
   });
-  res.status(201).json({ product });
+  console.log('product', product);
+
+  res.status(201).json(product);
 };
-// ce jopa
 export default ctrlWrapper(createProducts);

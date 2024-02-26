@@ -308,13 +308,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Product created successfully"
-                    }
-                  }
+                  "$ref": "#/components/schemas/Product"
                 }
               }
             }
@@ -403,6 +397,9 @@
       "Product": {
         "type": "object",
         "properties": {
+          "_id": {
+            "type": "string"
+          },
           "name": {
             "type": "string"
           },
@@ -410,11 +407,26 @@
             "type": "string"
           },
           "price": {
-            "type": "number"
+            "type": "number",
+            "example": 1250
           },
-          "sale": { "type": "number" },
+          "sale": {
+            "type": "number",
+            "description": "0 as no sale, more than 0 is as percent from full price"
+          },
           "category": {
             "type": "string"
+          },
+          "imgThumbnail": {
+            "type": "string",
+            "example": "https://example.com/image.jpg"
+          },
+          "imgGallery": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": "https://example.com/image.jpg"
+            }
           },
           "features": {
             "type": "array",
@@ -425,44 +437,43 @@
           "categories": {
             "type": "object",
             "properties": {
+              "sex": { "type": "string", "example": "male" },
+              "seasons": {
+                "type": "string",
+                "example": "winter"
+              },
               "brands": {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "example": "Nike"
-                }
+                "type": "string",
+                "example": "nike"
               },
               "colors": {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "example": "Red"
-                }
+                "type": "string",
+                "example": "red"
               },
               "sizes": {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "example": 40
-                }
-              },
-              "seasons": {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "example": "Winter"
-                }
+                "type": "string",
+                "example": "40"
               }
             }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2021-01-01T00:00:00.000Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2021-01-01T00:00:00.000Z"
           }
         }
-      },
-      "securitySchemes": {
-        "Bearer": {
-          "type": "http",
-          "scheme": "bearer",
-          "bearerFormat": "JWT"
-        }
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }

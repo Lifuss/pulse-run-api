@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response, Router } from 'express';
+import { Router } from 'express';
 import categories from '../controllers/products/categories';
 import upload from '../middlewares/upload';
 import createProducts from '../controllers/products/createProducts';
