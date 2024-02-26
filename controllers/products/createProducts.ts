@@ -18,7 +18,6 @@ const createProducts = async (req: Request, res: Response) => {
     size,
     season,
   } = req.body;
-  console.log('body', req.body);
 
   if (
     !req.files ||
@@ -81,7 +80,6 @@ const createProducts = async (req: Request, res: Response) => {
       brand: checkBrand?._id,
     },
   });
-  console.log('product', product);
 
   res.status(201).json(product);
 };
