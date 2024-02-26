@@ -4,6 +4,7 @@ import upload from '../middlewares/upload';
 import createProducts from '../controllers/products/createProducts';
 import validateBody from '../middlewares/validateBody';
 import { schemaProductCreate } from '../schemas/joi/joiValidator';
+import getNewProducts from '../controllers/products/newProducts';
 
 const router = Router();
 
@@ -18,5 +19,6 @@ router.post(
   validateBody(schemaProductCreate),
   createProducts,
 );
+router.get('/newest', getNewProducts);
 
 export default router;

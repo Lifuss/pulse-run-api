@@ -324,6 +324,27 @@
         ]
       }
     },
+    "/products/newest": {
+      "get": {
+        "tags": ["Products"],
+        "summary": "Get the newest products",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/users/subscribe": {
       "post": {
         "tags": ["User"],
