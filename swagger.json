@@ -176,6 +176,55 @@
         ]
       }
     },
+    "/products": {
+      "get": {
+        "tags": ["Products"],
+        "summary": "Get all products (yet only paginated, in future will be filtered by category, brand, color, size, season and sorted by price, date)",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "default": 15
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "page": { "type": "number", "example": 1 },
+                    "limit": { "type": "number", "example": 15 },
+                    "totalPages": { "type": "number", "example": 5 },
+                    "products": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Product"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/products/categories": {
       "get": {
         "tags": ["Products"],
@@ -215,6 +264,27 @@
                         "example": "Winter"
                       }
                     }
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/products/newest": {
+      "get": {
+        "tags": ["Products"],
+        "summary": "Get the newest products",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
                   }
                 }
               }
@@ -322,27 +392,6 @@
             "Bearer": []
           }
         ]
-      }
-    },
-    "/products/newest": {
-      "get": {
-        "tags": ["Products"],
-        "summary": "Get the newest products",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Product"
-                  }
-                }
-              }
-            },
-            "description": "Success"
-          }
-        }
       }
     },
     "/users/subscribe": {

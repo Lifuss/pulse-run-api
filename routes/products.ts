@@ -5,10 +5,12 @@ import createProducts from '../controllers/products/createProducts';
 import validateBody from '../middlewares/validateBody';
 import { schemaProductCreate } from '../schemas/joi/joiValidator';
 import getNewProducts from '../controllers/products/newProducts';
+import products from '../controllers/products/products';
 
 const router = Router();
 
 router.get('/categories', categories);
+router.get('/', products);
 
 router.post(
   '/create',
