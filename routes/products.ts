@@ -5,6 +5,7 @@ import createProducts from '../controllers/products/createProducts';
 import validateBody from '../middlewares/validateBody';
 import { schemaProductCreate } from '../schemas/joi/joiValidator';
 import getNewProducts from '../controllers/products/newProducts';
+import getProductsOnSale from '../controllers/products/salesProducts';
 import products from '../controllers/products/products';
 
 const router = Router();
@@ -22,5 +23,6 @@ router.post(
   createProducts,
 );
 router.get('/newest', getNewProducts);
+router.get('/sales', getProductsOnSale);
 
 export default router;
