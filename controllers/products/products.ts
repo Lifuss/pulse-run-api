@@ -7,7 +7,12 @@ const products = async (req: Request, res: Response) => {
   const limit = parseInt(req.query.limit as string) || 15;
   const skip = (page - 1) * limit;
 
-  const products = await Product.find().skip(skip).limit(limit);
+  const products = await Product.find()
+    .skip(skip)
+    .limit(limit)
+    .populate('categories.brand')
+    .populate('categories.color')
+    .populate('categories.size');
   const totalDoc = await Product.countDocuments();
   const totalPages = Math.ceil(totalDoc / limit);
   res.json({ page, limit, totalPages, products });

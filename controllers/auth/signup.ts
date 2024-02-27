@@ -6,7 +6,7 @@ import requestError from '../../utils/requestError';
 import bcryptjs from 'bcryptjs';
 
 const signup = async (req: Request, res: Response) => {
-  const { email, name, password, lastName } = req.body;
+  const { email, firstName, password, lastName } = req.body;
   const user = await User.findOne({ email });
   if (user) {
     throw requestError(409, 'User with this email already exists');
@@ -16,7 +16,7 @@ const signup = async (req: Request, res: Response) => {
     email,
     password: hashedPassword,
     profile: {
-      firstName: name,
+      firstName,
       lastName,
     },
   });

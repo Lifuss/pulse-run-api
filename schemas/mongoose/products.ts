@@ -20,9 +20,9 @@ export const productSchema = new Schema(
         required: true,
       },
 
-      size: { type: Schema.Types.ObjectId, ref: 'Size', required: true },
+      size: [{ type: Schema.Types.ObjectId, ref: 'Size', required: true }],
       brand: { type: Schema.Types.ObjectId, ref: 'Brand', required: true },
-      color: { type: Schema.Types.ObjectId, ref: 'Color', required: true },
+      color: [{ type: Schema.Types.ObjectId, ref: 'Color', required: true }],
     },
   },
   { timestamps: true, versionKey: false },
@@ -30,21 +30,21 @@ export const productSchema = new Schema(
 
 export const sizeSchema = new Schema(
   {
-    size: Number,
+    value: Number,
   },
   { versionKey: false },
 );
 
 export const brandSchema = new Schema(
   {
-    brand: String,
+    name: String,
   },
   { versionKey: false },
 );
 
 export const colorSchema = new Schema(
   {
-    color: String,
+    name: String,
   },
   { versionKey: false },
 );

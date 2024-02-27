@@ -5,7 +5,7 @@ export const schemaSignup = Joi.object({
     .email({ minDomainSegments: 2, tlds: { deny: ['ru'] } })
     .required(),
   password: Joi.string().min(8).max(16).required(),
-  name: Joi.string().required(),
+  firstName: Joi.string().required(),
   lastName: Joi.string().required(),
 });
 
@@ -30,7 +30,7 @@ export const schemaProductCreate = Joi.object({
   features: Joi.array().items(Joi.string()).required(),
   sex: Joi.string().required(),
   season: Joi.string().required(),
-  size: Joi.number().required(),
+  size: Joi.array().items(Joi.number()).required(),
   brand: Joi.string().required(),
-  color: Joi.string().required(),
+  color: Joi.array().items(Joi.string()).required(),
 });

@@ -39,10 +39,13 @@
                 "type": "object",
                 "properties": {
                   "email": {
-                    "type": "string"
+                    "type": "string",
+                    "format": "email",
+                    "example": "example@gmail.com"
                   },
                   "password": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "password123"
                   }
                 }
               }
@@ -82,16 +85,21 @@
                 "type": "object",
                 "properties": {
                   "email": {
-                    "type": "string"
+                    "type": "string",
+                    "format": "email",
+                    "example": "example@gamil.com"
                   },
                   "password": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "password123"
                   },
                   "firstName": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "John"
                   },
                   "lastName": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Doe"
                   }
                 }
               }
@@ -236,6 +244,20 @@
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "seasons": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "Winter"
+                      }
+                    },
+                    "sex": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "male"
+                      }
+                    },
                     "brands": {
                       "type": "array",
                       "items": {
@@ -255,13 +277,6 @@
                       "items": {
                         "type": "string",
                         "example": 40
-                      }
-                    },
-                    "seasons": {
-                      "type": "array",
-                      "items": {
-                        "type": "string",
-                        "example": "Winter"
                       }
                     }
                   }
@@ -408,7 +423,10 @@
                   "color": {
                     "type": "string"
                   },
-                  "size": {
+                  "size[0]": {
+                    "type": "number"
+                  },
+                  "size[1]": {
                     "type": "number"
                   },
                   "season": {
@@ -574,16 +592,39 @@
                 "example": "winter"
               },
               "brands": {
-                "type": "string",
-                "example": "nike"
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "example": "65de225d1777648afb13c3b4"
+                  },
+                  "brand": { "type": "string", "example": "Nike" }
+                }
               },
               "colors": {
-                "type": "string",
-                "example": "red"
+                "type": "array",
+                "items": {
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "65de225d1777648afb13c3b4"
+                    },
+                    "color": { "type": "string", "example": "red" }
+                  }
+                }
               },
               "sizes": {
-                "type": "string",
-                "example": "40"
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "65de225d1777648afb13c3b4"
+                    },
+                    "size": { "type": "number", "example": 40 }
+                  }
+                }
               }
             }
           },
