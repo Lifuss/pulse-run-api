@@ -294,6 +294,27 @@
         }
       }
     },
+    "/products/sales": {
+      "get": {
+        "tags": ["Products"],
+        "summary": "Get products on sale",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/products/create": {
       "post": {
         "tags": ["Products"],
