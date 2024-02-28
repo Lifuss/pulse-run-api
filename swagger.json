@@ -514,6 +514,20 @@
           }
         }
       }
+    },
+    "/users": {
+      "delete": {
+        "tags": ["User"],
+        "responses": {
+          "204": { "description": "Delete success" },
+          "401": { "description": "Unauthorized" }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
     }
   },
   "components": {
