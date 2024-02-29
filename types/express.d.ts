@@ -1,4 +1,7 @@
 import { Request } from 'express';
+import { User as PassportUser } from 'passport';
+
+type User = IUser & PassportUser;
 
 export interface IUser {
   _id: string;
@@ -18,7 +21,7 @@ export interface IUser {
 }
 
 export interface CustomRequest extends Request {
-  user?: IUser;
+  user?: User;
   headers: {
     authorization?: string;
   };

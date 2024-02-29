@@ -4,6 +4,7 @@ import bcrypt from 'bcryptjs';
 import { nanoid } from 'nanoid';
 import { Strategy } from 'passport-google-oauth2';
 import passport from 'passport';
+import { v4 as uuidv4 } from 'uuid';
 
 dotenv.config();
 
@@ -17,17 +18,20 @@ const googleParams = {
 };
 
 const googleCallback = async (
-  email: string,
-  displayName: string,
+  request: any,
+  accessToken: string,
+  refreshToken: string,
+  profile: any,
   done: any,
 ) => {
   try {
+    const { email, displayName } = profile;
     const user = await User.findOne({ email });
     if (user) {
       return done(null, user);
     }
-    const password = await bcrypt.hash(nanoid(), 5);
-    const verifyToken = nanoid();
+    const password = await bcrypt.hash(uuidv4(), 5);
+    const verifyToken = uuidv4();
     const newUser = await User.create({
       email,
       password,
