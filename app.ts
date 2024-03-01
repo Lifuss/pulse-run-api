@@ -8,8 +8,9 @@ import swaggerDocument from './swagger.json';
 import authRouter from './routes/auth';
 import productsRouter from './routes/products';
 import usersRouter from './routes/users';
-
 import { RequestError } from './utils/requestError';
+import passport from 'passport';
+import session from 'express-session';
 
 dotenv.config();
 
@@ -20,6 +21,16 @@ const formatLogger = app.get('env') === 'development' ? 'dev' : 'short';
 app.use(logger(formatLogger));
 app.use(cors());
 app.use(express.json());
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || 'default-secret',
+    resave: false,
+    saveUninitialized: false,
+  }),
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
