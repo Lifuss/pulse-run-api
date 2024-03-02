@@ -14,6 +14,7 @@ export interface IUser {
     lastName: string;
     phone: string;
   };
+  avatar: string;
   buyHistory: string[];
   favoriteProducts: string[];
   createdAt: string;

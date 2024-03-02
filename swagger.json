@@ -126,6 +126,17 @@
         }
       }
     },
+    "/auth/google": {
+      "get": {
+        "tags": ["Auth"],
+        "summary": "Login with Google",
+        "responses": {
+          "302": {
+            "description": "Redirect to Google login page. After successful login, user will be redirected to the frontend app with token in the URL. Example('https://example.com?token={token}')"
+          }
+        }
+      }
+    },
     "/auth/signout": {
       "post": {
         "tags": ["Auth"],
@@ -542,6 +553,9 @@
             "type": "object",
             "properties": {
               "email": {
+                "type": "string"
+              },
+              "avatar": {
                 "type": "string"
               },
               "firstName": {

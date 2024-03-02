@@ -1,7 +1,6 @@
 import dotenv from 'dotenv';
 import User from '../models/user';
 import bcrypt from 'bcryptjs';
-import { nanoid } from 'nanoid';
 import { Strategy } from 'passport-google-oauth2';
 import passport from 'passport';
 import { v4 as uuidv4 } from 'uuid';
@@ -25,7 +24,7 @@ const googleCallback = async (
   done: any,
 ) => {
   try {
-    const { email, displayName } = profile;
+    const { email, name, picture } = profile;
     const user = await User.findOne({ email });
     if (user) {
       return done(null, user);
@@ -36,10 +35,10 @@ const googleCallback = async (
       email,
       password,
       profile: {
-        firstName: displayName,
-        lastName: displayName,
-        phone: '',
+        firstName: name.givenName,
+        lastName: name.familyName,
       },
+      avatar: picture,
       token: verifyToken,
     });
     done(null, newUser);

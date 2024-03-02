@@ -11,6 +11,7 @@ const signup = async (req: Request, res: Response) => {
   if (user) {
     throw requestError(409, 'User with this email already exists');
   }
+
   const hashedPassword = await bcryptjs.hash(password, 5);
   const newUser = await User.create({
     email,
@@ -21,14 +22,16 @@ const signup = async (req: Request, res: Response) => {
     },
   });
 
+  const { profile, _id, avatar } = newUser;
+
   const payload = {
-    id: newUser._id,
+    id: _id,
   };
   const secretKey: string = process.env.JWT_SECRET || 'default_secret';
   const token = jwt.sign(payload, secretKey, { expiresIn: '24h' });
 
-  await User.findByIdAndUpdate(newUser._id, { token });
-  res.status(201).json({ token, user: { ...newUser.profile, email } });
+  await User.findByIdAndUpdate(_id, { token });
+  res.status(201).json({ token, user: { ...profile, avatar, email } });
 };
 
 export default ctrlWrapper(signup);

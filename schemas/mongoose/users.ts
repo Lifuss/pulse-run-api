@@ -33,6 +33,9 @@ const userSchema = new Schema(
         default: '0000000000',
       },
     },
+    avatar: {
+      type: String,
+    },
     // TODO: buyHistory and favoriteProducts should be ref to Product model
     buyHistory: {
       type: [String],
