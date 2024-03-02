@@ -4,9 +4,21 @@ export const schemaSignup = Joi.object({
   email: Joi.string()
     .email({ minDomainSegments: 2, tlds: { deny: ['ru'] } })
     .required(),
-  password: Joi.string().min(8).max(16).required(),
-  firstName: Joi.string().required(),
-  lastName: Joi.string().required(),
+  password: Joi.string()
+    .min(8)
+    .max(16)
+    .regex(/^(?=.*[A-Za-z])[A-Za-z\d]{8,16}$/)
+    .required(),
+  firstName: Joi.string()
+    .regex(/^[A-Za-zА-Яа-я\-]+$/)
+    .min(1)
+    .max(30)
+    .required(),
+  lastName: Joi.string()
+    .regex(/^[A-Za-zА-Яа-я\-]+$/)
+    .min(1)
+    .max(30)
+    .required(),
 });
 
 export const schemaSignIn = Joi.object({
