@@ -8,7 +8,6 @@ import signout from '../controllers/auth/signout';
 import current from '../controllers/auth/current';
 import googleAuth from '../controllers/auth/google';
 import passport from '../middlewares/googleAuthenticate';
-// import passport from 'passport';
 
 const router = express.Router();
 
@@ -18,7 +17,9 @@ router.post('/signout', authentication, signout);
 router.get('/current', authentication, current);
 router.get(
   '/google',
-  passport.authenticate('google', { scope: ['profile', 'email'] }),
+  passport.authenticate('google', {
+    scope: ['profile', 'email'],
+  }),
 );
 router.get(
   '/google/callback',

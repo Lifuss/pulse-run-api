@@ -12,6 +12,8 @@ const signIn = async (req: Request, res: Response): Promise<void> => {
     return;
   }
 
+  const { profile, avatar, _id } = user;
+
   const isPasswordValid = await bcryptjs.compare(password, user.password);
   if (!isPasswordValid) {
     res.status(400).json({ message: 'Invalid password' });
@@ -19,14 +21,14 @@ const signIn = async (req: Request, res: Response): Promise<void> => {
   }
 
   const payload = {
-    id: user._id,
+    id: _id,
   };
   const secretKey: string = process.env.JWT_SECRET || 'default_secret';
   const token = jwt.sign(payload, secretKey, { expiresIn: '24h' });
 
-  await User.findByIdAndUpdate(user._id, { token });
+  await User.findByIdAndUpdate(_id, { token });
 
-  res.status(200).json({ token, user: { ...user.profile, email } });
+  res.status(200).json({ token, user: { ...profile, email, avatar } });
 };
 
 export default ctrlWrapper(signIn);
