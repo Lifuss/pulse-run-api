@@ -19,8 +19,7 @@ passport.use(
     },
     async function (accessToken, refreshToken, profile, cb) {
       const user = await User.findOne({
-        facebookId: profile.id,
-        provider: 'facebook',
+        email: profile.emails?.[0]?.value,
       });
       if (!user) {
         const password = await bcrypt.hash(uuidv4(), 5);
