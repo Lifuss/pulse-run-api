@@ -137,6 +137,17 @@
         }
       }
     },
+    "/auth/facebook": {
+      "get": {
+        "tags": ["Auth"],
+        "summary": "Login with Facebook",
+        "responses": {
+          "302": {
+            "description": "Redirect to Facebook login page. After successful login, user will be redirected to the frontend app with token in the URL. Example('https://example.com?token={token}')"
+          }
+        }
+      }
+    },
     "/auth/signout": {
       "post": {
         "tags": ["Auth"],

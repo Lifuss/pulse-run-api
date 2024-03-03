@@ -9,7 +9,7 @@ dotenv.config();
 
 const { FRONTEND_URL, JWT_SECRET } = process.env;
 
-const googleAuth = async (req: CustomRequest, res: Response) => {
+const handleAuthCallback = async (req: CustomRequest, res: Response) => {
   if (!req.user || !JWT_SECRET) {
     throw new Error('User not found');
   }
@@ -29,4 +29,4 @@ const googleAuth = async (req: CustomRequest, res: Response) => {
   res.redirect(`http://localhost:3000/Phonebook/contacts?token=${token}`);
 };
 
-export default ctrlWrapper(googleAuth);
+export default ctrlWrapper(handleAuthCallback);
