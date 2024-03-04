@@ -2,6 +2,11 @@ import { Request, Response } from 'express';
 import sendEmail from '../../utils/sendEmail';
 import Subscribe from '../../models/subscribe';
 import ctrlWrapper from '../../utils/ctrlWrapper';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const { FRONTEND_URL } = process.env;
 
 const subscribeEmail = async (req: Request, res: Response) => {
   const { email } = req.body;
@@ -12,7 +17,7 @@ const subscribeEmail = async (req: Request, res: Response) => {
     const mail = {
       to: email,
       subject: 'Subscribed and got discount on our products!',
-      html: '<h1>You have subscribed to our newsletter and got 10% of discount</h1><a href="http://localhost:3020">Go to our website</a>',
+      html: `<h1>You have subscribed to our newsletter and got 10% of discount</h1><a href=${FRONTEND_URL}>Go to our website</a>`,
     };
     await sendEmail(mail);
 

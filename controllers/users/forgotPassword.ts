@@ -3,6 +3,11 @@ import User from '../../models/user';
 import { v4 as uuidv4 } from 'uuid';
 import sendEmail from '../../utils/sendEmail';
 import ctrlWrapper from '../../utils/ctrlWrapper';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const { FRONTEND_URL } = process.env;
 
 const forgotPassword = async (req: Request, res: Response): Promise<void> => {
   const { email } = req.body;
@@ -24,7 +29,7 @@ const forgotPassword = async (req: Request, res: Response): Promise<void> => {
   const mail = {
     to: email,
     subject: 'Reset your password',
-    html: `<p>To reset your password, click on this <a href="http://localhost:3000/Phonebook/reset-password?resetToken=${resetToken}">link</a>.</p>`,
+    html: `<p>To reset your password, click on this <a href="${FRONTEND_URL}/reset-password?resetToken=${resetToken}">link</a>.</p>`,
   };
   await sendEmail(mail);
 
