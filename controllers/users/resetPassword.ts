@@ -4,11 +4,11 @@ import bcrypt from 'bcryptjs';
 import ctrlWrapper from '../../utils/ctrlWrapper';
 
 const resetPassword = async (req: Request, res: Response) => {
-  const { token } = req.params;
+  const { resetToken } = req.query;
   const { password } = req.body;
 
   const user = await User.findOne({
-    resetPasswordToken: token,
+    resetPasswordToken: resetToken,
     resetPasswordExpires: { $gt: new Date() },
   });
 
@@ -17,7 +17,7 @@ const resetPassword = async (req: Request, res: Response) => {
     return;
   }
 
-  const hashedPassword = await bcrypt.hash(password, 12);
+  const hashedPassword = await bcrypt.hash(password, 5);
 
   user.password = hashedPassword;
   user.resetPasswordToken = undefined;

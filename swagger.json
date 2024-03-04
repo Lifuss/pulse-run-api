@@ -550,6 +550,105 @@
           }
         ]
       }
+    },
+    "/users/forgot-password": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Forgot password",
+        "description": "Send reset password email to user's email address and email contains link with reset token. Example: http://example.com/reset-password?resetToken=${resetToken}",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": ["email"],
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Reset password email has been sent. Check your email"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found (User not found)"
+          }
+        }
+      }
+    },
+    "/users/reset-password": {
+      "patch": {
+        "tags": ["User"],
+        "summary": "Reset password",
+        "parameters": [
+          {
+            "name": "resetToken",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "65de225d1777648afb13c3b4"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": ["password", "token"],
+                "type": "object",
+                "properties": {
+                  "password": {
+                    "type": "string"
+                  },
+                  "token": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Password reset successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request (Invalid or expired token)"
+          }
+        }
+      }
     }
   },
   "components": {

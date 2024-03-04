@@ -11,22 +11,22 @@ const forgotPassword = async (req: Request, res: Response): Promise<void> => {
   if (!user) {
     res.status(404).json({ message: 'User not found' });
     return;
-  } else {
-    const token = uuidv4();
-    const expiresIn = new Date();
-    expiresIn.setHours(expiresIn.getHours() + 1);
-    await User.findByIdAndUpdate(user._id, {
-      resetPasswordToken: token,
-      resetPasswordExpires: expiresIn,
-    });
-
-    const mail = {
-      to: email,
-      subject: 'Reset your password',
-      html: `<p>To reset your password, click on this <a href="http://localhost:3000/Phonebook/reset-password/${token}">link</a>.</p>`,
-    };
-    await sendEmail(mail);
   }
+  const resetToken = uuidv4();
+  const expiresIn = new Date();
+  expiresIn.setHours(expiresIn.getHours() + 1);
+
+  await User.findByIdAndUpdate(user._id, {
+    resetPasswordToken: resetToken,
+    resetPasswordExpires: expiresIn,
+  });
+
+  const mail = {
+    to: email,
+    subject: 'Reset your password',
+    html: `<p>To reset your password, click on this <a href="http://localhost:3000/Phonebook/reset-password?resetToken=${resetToken}">link</a>.</p>`,
+  };
+  await sendEmail(mail);
 
   res.status(200).json({ message: 'Reset password email has been sent.' });
 };

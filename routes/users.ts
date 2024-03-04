@@ -12,5 +12,5 @@ const router = express.Router();
 router.post('/subscribe', validateBody(schemaSubscribe), subscribeEmail);
 router.delete('/', authentication, deleteUser);
 router.post('/forgot-password', forgotPassword);
-router.post('/reset-password/:token', resetPassword);
+router.patch('/reset-password', resetPassword);
 export default router;
