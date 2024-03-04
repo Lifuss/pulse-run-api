@@ -16,15 +16,14 @@ const forgotPassword = async (req: Request, res: Response): Promise<void> => {
     const expiresIn = new Date();
     expiresIn.setHours(expiresIn.getHours() + 1);
     await User.findByIdAndUpdate(user._id, {
-      resetPassworToken: token,
+      resetPasswordToken: token,
       resetPasswordExpires: expiresIn,
     });
 
     const mail = {
       to: email,
       subject: 'Reset your password',
-      //   text: `To reset your password, click on this link: http://localhost:3020/reset-password/${token}`,
-      html: `<p>To reset your password, click on this <a href="http://localhost:3020/reset-password/${token}">link</a>.</p>`,
+      html: `<p>To reset your password, click on this <a href="http://localhost:3000/Phonebook/reset-password/${token}">link</a>.</p>`,
     };
     await sendEmail(mail);
   }
