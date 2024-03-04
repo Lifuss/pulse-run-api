@@ -19,6 +19,8 @@ export interface IUser {
   favoriteProducts: string[];
   createdAt: string;
   updatedAt: string;
+  resetPasswordToken?: string;
+  resetPasswordExpires?: Date;
 }
 
 export interface CustomRequest extends Request {
