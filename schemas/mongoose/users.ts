@@ -43,6 +43,12 @@ const userSchema = new Schema(
     favoriteProducts: {
       type: [String],
     },
+    resetPasswordToken: {
+      type: String,
+    },
+    resetPasswordExpires: {
+      type: Date,
+    },
   },
   { timestamps: true, versionKey: false },
 );

@@ -25,8 +25,7 @@ const handleAuthCallback = async (req: CustomRequest, res: Response) => {
 
   await User.findByIdAndUpdate(id, { token });
 
-  // res.redirect(`${FRONTEND_URL}/Phonebook/login?token=${token}`);
-  res.redirect(`http://localhost:3000/Phonebook/contacts?token=${token}`);
+  res.redirect(`${FRONTEND_URL}?token=${token}`);
 };
 
 export default ctrlWrapper(handleAuthCallback);
