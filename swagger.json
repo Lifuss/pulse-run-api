@@ -495,6 +495,79 @@
         ]
       }
     },
+    "/users": {
+      "patch": {
+        "tags": ["User"],
+        "summary": "Update user",
+        "description": "accept one or more fields to update user profile. Example: firstName, lastName, phone, password, email, avatar",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "avatar": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "firstName": {
+                    "type": "string"
+                  },
+                  "lastName": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (No data to update)"
+          },
+          "409": {
+            "description": "Conflict (Email already exists)"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["User"],
+        "summary": "Delete user",
+        "responses": {
+          "204": { "description": "Delete success" },
+          "401": { "description": "Unauthorized" }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
     "/users/subscribe": {
       "post": {
         "tags": ["User"],
@@ -535,20 +608,6 @@
             "description": "Conflict (User already subscribed)"
           }
         }
-      }
-    },
-    "/users": {
-      "delete": {
-        "tags": ["User"],
-        "responses": {
-          "204": { "description": "Delete success" },
-          "401": { "description": "Unauthorized" }
-        },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
       }
     },
     "/users/forgot-password": {

@@ -47,3 +47,22 @@ export const schemaProductCreate = Joi.object({
   brand: Joi.string().required(),
   color: Joi.array().items(Joi.string()).required(),
 });
+
+export const schemaUpdateUser = Joi.object({
+  email: Joi.string()
+    .email({ minDomainSegments: 2, tlds: { deny: ['ru'] } })
+    .max(64),
+  password: Joi.string()
+    .min(8)
+    .max(16)
+    .regex(/^(?=.*[A-Za-z])[A-Za-z\d]{8,16}$/),
+  firstName: Joi.string()
+    .regex(/^[A-Za-zа-яА-ЯіІїЇєЄ\-]+$/)
+    .min(1)
+    .max(30),
+  lastName: Joi.string()
+    .regex(/^[A-Za-zа-яА-ЯіІїЇєЄ\-]+$/)
+    .min(1)
+    .max(30),
+  phone: Joi.string().regex(/^\+380\d{9}$/),
+});
