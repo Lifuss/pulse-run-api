@@ -11,12 +11,12 @@ export const schemaSignup = Joi.object({
     .regex(/^(?=.*[A-Za-z])[A-Za-z\d]{8,16}$/)
     .required(),
   firstName: Joi.string()
-    .regex(/^[A-Za-zа-яА-ЯіІїЇєЄ\-]+$/)
+    .regex(/^[A-Za-zа-яА-ЯіІїЇєЄ-]+$/)
     .min(1)
     .max(30)
     .required(),
   lastName: Joi.string()
-    .regex(/^[A-Za-zа-яА-ЯіІїЇєЄ\-]+$/)
+    .regex(/^[A-Za-zа-яА-ЯіІїЇєЄ-]+$/)
     .min(1)
     .max(30)
     .required(),
@@ -57,12 +57,12 @@ export const schemaUpdateUser = Joi.object({
     .max(16)
     .regex(/^(?=.*[A-Za-z])[A-Za-z\d]{8,16}$/),
   firstName: Joi.string()
-    .regex(/^[A-Za-zа-яА-ЯіІїЇєЄ\-]+$/)
+    .regex(/^[A-Za-zа-яА-ЯіІїЇєЄ-]+$/)
     .min(1)
     .max(30),
   lastName: Joi.string()
-    .regex(/^[A-Za-zа-яА-ЯіІїЇєЄ\-]+$/)
+    .regex(/^[A-Za-zа-яА-ЯіІїЇєЄ-]+$/)
     .min(1)
     .max(30),
-  phone: Joi.string().regex(/^\+380\d{9}$/),
+  phone: Joi.string().regex(/^\d{9}$/),
 });

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import dotenv from 'dotenv';
 import User from '../models/user';
 import bcrypt from 'bcryptjs';
@@ -13,7 +14,7 @@ const googleParams = {
   clientID: GOOGLE_CLIENT_ID || '',
   clientSecret: GOOGLE_CLIENT_SECRET || '',
   callbackURL: `${BASE_URL}/api/auth/google/callback`,
-  passReqToCallback: true as true,
+  passReqToCallback: true as const,
 };
 
 const googleCallback = async (

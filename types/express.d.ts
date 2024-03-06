@@ -1,8 +1,6 @@
 import { Request } from 'express';
 import { User as PassportUser } from 'passport';
 
-type User = IUser & PassportUser;
-
 export interface IUser {
   _id: string;
   email: string;
@@ -22,6 +20,7 @@ export interface IUser {
   resetPasswordToken?: string;
   resetPasswordExpires?: Date;
 }
+type User = IUser & PassportUser;
 
 export interface CustomRequest extends Request {
   user?: User;
