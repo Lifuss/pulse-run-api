@@ -209,7 +209,9 @@
     "/products": {
       "get": {
         "tags": ["Products"],
-        "summary": "Get all products (yet only paginated, in future will be filtered by category, brand, color, size, season and sorted by price, date)",
+        "summary": "Get all products ",
+        "description": "paginated, filtered by category, brand, color, size, season and sort by price, date), all this is not required, if not provided, it will return all products from 1 page and 15 limit",
+
         "parameters": [
           {
             "name": "page",
@@ -227,6 +229,73 @@
             "schema": {
               "type": "number",
               "default": 15
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["price", "createdAt"],
+              "default": "createdAt"
+            },
+            "description": "sort by price or created date"
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["asc", "desc"],
+              "default": "desc"
+            },
+            "description": "asc for ascending, desc for descending"
+          },
+          {
+            "name": "brand",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "Nike"
+            }
+          },
+          {
+            "name": "color",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "Червоний"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "example": 40
+            }
+          },
+          {
+            "name": "season",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["winter", "summer", "all-season"]
+            }
+          },
+          {
+            "name": "sex",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["male", "female", "unisex"]
             }
           }
         ],
@@ -251,6 +320,40 @@
               }
             },
             "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request (Invalid limit or page parameters)"
+          }
+        }
+      }
+    },
+    "/products/:id": {
+      "get": {
+        "tags": ["Products"],
+        "summary": "Get product by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found (Product not found)"
           }
         }
       }

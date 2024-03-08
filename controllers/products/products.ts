@@ -1,20 +1,83 @@
 import { Request, Response } from 'express';
-import { Product } from '../../models/products';
+import { Brand, Color, Product, Size } from '../../models/products';
 import ctrlWrapper from '../../utils/ctrlWrapper';
+import { FilterQuery } from 'mongoose';
+
+type SortOrder = 1 | -1;
+interface Query {
+  'categories.brand': string[];
+  'categories.color': string[];
+  'categories.size': string[];
+  'categories.sex'?: string[];
+  'categories.season'?: string[];
+  [key: string]: string[] | undefined;
+}
+interface ReqQuery {
+  page?: string;
+  limit?: string;
+  sort?: 'createdAt' | 'price';
+  order?: 'asc' | 'desc';
+  brand?: string;
+  color?: string;
+  size?: string;
+  sex?: string;
+  season?: string;
+}
 
 const products = async (req: Request, res: Response) => {
-  const page = parseInt(req.query.page as string) || 1;
-  const limit = parseInt(req.query.limit as string) || 15;
-  const skip = (page - 1) * limit;
+  const {
+    page = 1,
+    limit = 15,
+    sort = 'createdAt',
+    order,
+    brand,
+    color,
+    size,
+    sex,
+    season,
+  } = req.query as ReqQuery;
 
-  const products = await Product.find()
-    .skip(skip)
-    .limit(limit)
+  const orderNumber: number = order === 'desc' ? -1 : 1;
+
+  if (+page < 1 || +limit < 1) {
+    res.status(400).json({ message: 'Invalid page or limit' });
+    return;
+  }
+
+  const query: FilterQuery<typeof Product> = {};
+
+  if (brand) {
+    const brandValues = brand.split(',');
+    const brandDocs = await Brand.find({ name: { $in: brandValues } });
+    const brandIds = brandDocs.map((doc) => doc._id.toString());
+    query['categories.brand'] = { $in: brandIds };
+  }
+  if (color) {
+    const colorValues = color.split(',');
+    const colorDocs = await Color.find({ name: { $in: colorValues } });
+    const colorIds = colorDocs.map((doc) => doc._id.toString());
+    query['categories.color'] = { $in: colorIds };
+  }
+  if (size) {
+    const sizeValues = size.split(',');
+    const sizeDocs = await Size.find({ value: { $in: sizeValues } });
+    const sizeIds = sizeDocs.map((doc) => doc._id.toString());
+    query['categories.size'] = { $in: sizeIds };
+  }
+
+  if (sex) query['categories.sex'] = (sex as string).split(',');
+  if (season) query['categories.season'] = (season as string).split(',');
+
+  const products = await Product.find(query as Partial<Query>)
+    .skip((+page - 1) * +limit)
+    .limit(+limit)
     .populate('categories.brand')
     .populate('categories.color')
-    .populate('categories.size');
-  const totalDoc = await Product.countDocuments();
-  const totalPages = Math.ceil(totalDoc / limit);
+    .populate('categories.size')
+    .sort({ [sort]: orderNumber as SortOrder });
+
+  const totalDoc = await Product.countDocuments(query as Partial<Query>);
+  const totalPages = Math.ceil(totalDoc / +limit);
   res.json({ page, limit, totalPages, products });
 };
 

@@ -37,7 +37,6 @@ const userSchema = new Schema(
       type: String,
       default: '',
     },
-    // TODO: buyHistory and favoriteProducts should be ref to Product model
     buyHistory: {
       type: [String],
     },
