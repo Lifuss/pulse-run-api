@@ -1,4 +1,5 @@
 import { Schema } from 'mongoose';
+import { seasonsArr, sexArr } from '../../utils/constants';
 
 export const productSchema = new Schema(
   {
@@ -12,11 +13,11 @@ export const productSchema = new Schema(
     categories: {
       sex: {
         type: String,
-        enum: ['male', 'female', 'unisex'],
+        enum: sexArr,
       },
       season: {
         type: String,
-        enum: ['winter', 'summer', 'all-season'],
+        enum: seasonsArr,
         required: true,
       },
 

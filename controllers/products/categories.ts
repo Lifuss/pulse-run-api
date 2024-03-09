@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 
 import ctrlWrapper from '../../utils/ctrlWrapper';
 import { Brand, Color, Size } from '../../models/products';
+import { seasonsArr, sexArr } from '../../utils/constants';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getNames = async (Model: any) => {
@@ -22,8 +23,8 @@ const categories = async (req: Request, res: Response) => {
   ]);
 
   res.status(200).json({
-    seasons: ['winter', 'summer', 'all-season'],
-    sex: ['male', 'female', 'unisex'],
+    seasons: seasonsArr,
+    sex: sexArr,
     brands: brandNames,
     colors: colorNames,
     sizes: sizeNames,
