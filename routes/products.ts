@@ -8,6 +8,7 @@ import getNewProducts from '../controllers/products/newProducts';
 import getProductsOnSale from '../controllers/products/salesProducts';
 import products from '../controllers/products/products';
 import getById from '../controllers/products/getById';
+import getSearchProducts from '../controllers/products/getSearchProducts';
 
 const router = Router();
 
@@ -25,6 +26,7 @@ router.post(
 );
 router.get('/newest', getNewProducts);
 router.get('/sales', getProductsOnSale);
+router.get('/search', getSearchProducts);
 router.get('/:id', getById);
 
 export default router;
