@@ -548,6 +548,9 @@
               }
             },
             "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request (name is required)"
           }
         }
       }
