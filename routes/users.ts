@@ -1,6 +1,10 @@
 import express from 'express';
 import validateBody from '../middlewares/validateBody';
-import { schemaSubscribe, schemaUpdateUser } from '../schemas/joi/joiValidator';
+import {
+  schemaSubscribe,
+  schemaSupport,
+  schemaUpdateUser,
+} from '../schemas/joi/joiValidator';
 import subscribeEmail from '../controllers/users/subscribeEmail';
 import authentication from '../middlewares/authentication';
 import deleteUser from '../controllers/users/deleteUser';
@@ -8,6 +12,7 @@ import forgotPassword from '../controllers/users/forgotPassword';
 import resetPassword from '../controllers/users/resetPassword';
 import updateUser from '../controllers/users/updateUser';
 import upload from '../middlewares/upload';
+import createSupportTicket from '../controllers/users/supportTicket';
 
 const router = express.Router();
 
@@ -22,4 +27,5 @@ router.patch(
   validateBody(schemaUpdateUser),
   updateUser,
 );
+router.post('/supports', validateBody(schemaSupport), createSupportTicket);
 export default router;

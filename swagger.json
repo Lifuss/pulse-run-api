@@ -773,6 +773,56 @@
         }
       }
     },
+    "/users/supports": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Send support message",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": ["email", "message"],
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Лірой Дженкінс"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "example@gmail.com "
+                  },
+                  "subject": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Support ticket created successfully"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/users/forgot-password": {
       "post": {
         "tags": ["User"],

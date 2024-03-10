@@ -54,3 +54,16 @@ export const schemaUpdateUser = Joi.object({
   lastName: Joi.string().regex(nameRegex).min(1).max(30),
   phone: Joi.string().regex(/^\d{9}$/),
 });
+
+export const schemaSupport = Joi.object({
+  name: Joi.string()
+    .regex(/^[A-Za-zа-яА-ЯіІїЇєЄ' -]+$/)
+    .min(1)
+    .max(60)
+    .required(),
+  email: Joi.string()
+    .email({ minDomainSegments: 2, tlds: { deny: ['ru'] } })
+    .required(),
+  subject: Joi.string().min(1).max(50).required(),
+  message: Joi.string().min(1).max(500).required(),
+});
