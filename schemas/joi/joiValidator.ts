@@ -67,3 +67,19 @@ export const schemaSupport = Joi.object({
   subject: Joi.string().min(1).max(50).required(),
   message: Joi.string().min(1).max(500).required(),
 });
+
+export const schemaPayment = Joi.object({
+  cardNumber: Joi.string()
+    .regex(/^\d{16}$/)
+    .required(),
+  cardName: Joi.string()
+    .regex(/^[A-Za-z ]+$/)
+    .min(1)
+    .max(60)
+    .required(),
+  cardDate: Joi.date().iso().required(),
+  cardCVC: Joi.string()
+    .length(3)
+    .pattern(/^[0-9]+$/)
+    .required(),
+});
