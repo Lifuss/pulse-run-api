@@ -1,6 +1,7 @@
 import express from 'express';
 import validateBody from '../middlewares/validateBody';
 import {
+  schemaPayment,
   schemaSubscribe,
   schemaSupport,
   schemaUpdateUser,
@@ -13,6 +14,8 @@ import resetPassword from '../controllers/users/resetPassword';
 import updateUser from '../controllers/users/updateUser';
 import upload from '../middlewares/upload';
 import createSupportTicket from '../controllers/users/supportTicket';
+import addPayment from '../controllers/users/addPayment';
+import deletePayment from '../controllers/users/deletePayment';
 
 const router = express.Router();
 
@@ -27,5 +30,12 @@ router.patch(
   validateBody(schemaUpdateUser),
   updateUser,
 );
+router.post(
+  '/payments',
+  authentication,
+  validateBody(schemaPayment),
+  addPayment,
+);
+router.delete('/payments/:paymentId', authentication, deletePayment);
 router.post('/supports', validateBody(schemaSupport), createSupportTicket);
 export default router;

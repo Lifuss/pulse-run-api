@@ -773,6 +773,99 @@
         }
       }
     },
+    "/users/payments": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Add new payment",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": ["cardNumber", "cardName", "cardDate", "cardCVC"],
+                "type": "object",
+                "properties": {
+                  "cardNumber": {
+                    "type": "string",
+                    "example": "4111111111111113"
+                  },
+                  "cardName": {
+                    "type": "string",
+                    "example": "John Doe"
+                  },
+                  "cardDate": {
+                    "type": "string",
+                    "example": "2024-12"
+                  },
+                  "cardCVC": {
+                    "type": "string",
+                    "example": "123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Payment added successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found (User not found)"
+          },
+          "409": {
+            "description": "Conflict (Card already exists)"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/users/payments/{paymentId}": {
+      "delete": {
+        "tags": ["User"],
+        "summary": "Delete payment",
+        "parameters": [
+          {
+            "name": "paymentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "65de225d1777648afb13c3b4"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found (Card not found)"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
     "/users/supports": {
       "post": {
         "tags": ["User"],

@@ -37,6 +37,26 @@ const userSchema = new Schema(
       type: String,
       default: '',
     },
+    payment: [
+      {
+        cardNumber: {
+          type: String,
+          default: '',
+        },
+        cardName: {
+          type: String,
+          default: '',
+        },
+        cardDate: {
+          type: String,
+          default: '',
+        },
+        cardCVC: {
+          type: String,
+          default: '',
+        },
+      },
+    ],
     buyHistory: {
       type: [String],
     },
