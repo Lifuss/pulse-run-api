@@ -327,7 +327,7 @@
         }
       }
     },
-    "/products/:id": {
+    "/products/{id}": {
       "get": {
         "tags": ["Products"],
         "summary": "Get product by id",
