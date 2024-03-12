@@ -7,7 +7,7 @@ import cloudinary from '../../utils/cloudinary';
 const deleteUser = async (req: CustomRequest, res: Response) => {
   const { _id, avatar } = req.user as { _id: string; avatar: string };
 
-  if (!avatar.includes('google') && !avatar.includes('facebook')) {
+  if (!avatar.includes('google') && !avatar.includes('facebook') && avatar) {
     const oldAvatarPublicId = avatar;
     const startsWith = oldAvatarPublicId.indexOf('pulse/users/');
     const publicIdWithExpansion = oldAvatarPublicId.slice(startsWith);
