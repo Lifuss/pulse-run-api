@@ -4,6 +4,9 @@ const nameRegex = /^[A-Za-zа-яА-ЯіІїЇєЄ-]+$/;
 
 export const schemaSignup = Joi.object({
   email: Joi.string()
+    .regex(
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]{2,})*$/,
+    )
     .email({ minDomainSegments: 2, tlds: { deny: ['ru'] } })
     .max(64)
     .required(),
@@ -18,6 +21,9 @@ export const schemaSignup = Joi.object({
 
 export const schemaSignIn = Joi.object({
   email: Joi.string()
+    .regex(
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]{2,})*$/,
+    )
     .email({ minDomainSegments: 2, tlds: { deny: ['ru'] } })
     .required(),
   password: Joi.string().min(8).max(16).required(),
@@ -25,6 +31,9 @@ export const schemaSignIn = Joi.object({
 
 export const schemaSubscribe = Joi.object({
   email: Joi.string()
+    .regex(
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]{2,})*$/,
+    )
     .email({ minDomainSegments: 2, tlds: { deny: ['ru'] } })
     .required(),
 });
@@ -44,6 +53,9 @@ export const schemaProductCreate = Joi.object({
 
 export const schemaUpdateUser = Joi.object({
   email: Joi.string()
+    .regex(
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]{2,})*$/,
+    )
     .email({ minDomainSegments: 2, tlds: { deny: ['ru'] } })
     .max(64),
   password: Joi.string()
@@ -62,7 +74,13 @@ export const schemaSupport = Joi.object({
     .max(60)
     .required(),
   email: Joi.string()
-    .email({ minDomainSegments: 2, tlds: { deny: ['ru'] } })
+    .regex(
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]{2,})*$/,
+    )
+    .email({
+      minDomainSegments: 2,
+      tlds: { deny: ['ru'] },
+    })
     .required(),
   subject: Joi.string().min(1).max(50).required(),
   message: Joi.string().min(1).max(500).required(),
