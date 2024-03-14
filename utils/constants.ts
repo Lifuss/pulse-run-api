@@ -1,2 +1,2 @@
-export const seasonsArr = ['winter', 'summer', 'all-season'];
-export const sexArr = ['male', 'female', 'unisex'];
+export const seasonsArr = ['Зима', 'Літо', 'Весна/Осінь'];
+export const sexArr = ['Чоловік', 'Жінка', 'Унісекс'];
