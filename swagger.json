@@ -286,7 +286,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["winter", "summer", "all-season"]
+              "enum": ["Зима", "Літо", "Весна/Осінь"]
             }
           },
           {
@@ -295,7 +295,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["male", "female", "unisex"]
+              "enum": ["Чоловік", "Жінка", "Унісекс"]
             }
           }
         ],
@@ -417,6 +417,7 @@
       "get": {
         "tags": ["Products"],
         "summary": "Get the newest products",
+        "description": "Get the newest products, all filters are optional if not provided, it will return all products from 1 page and 15 limit and sort by created date",
         "parameters": [
           {
             "name": "page",
@@ -434,6 +435,73 @@
             "schema": {
               "type": "number",
               "default": 15
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["price", "createdAt"],
+              "default": "createdAt"
+            },
+            "description": "sort by price or created date "
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["asc", "desc"],
+              "default": "desc"
+            },
+            "description": "asc for ascending, desc for descending"
+          },
+          {
+            "name": "brand",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "Nike"
+            }
+          },
+          {
+            "name": "color",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "Червоний"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "example": 40
+            }
+          },
+          {
+            "name": "season",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["Зима", "Літо", "Весна/Осінь"]
+            }
+          },
+          {
+            "name": "sex",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["Чоловік", "Жінка", "Унісекс"]
             }
           }
         ],
@@ -458,6 +526,7 @@
       "get": {
         "tags": ["Products"],
         "summary": "Get products on sale",
+        "description": "Get products on sale (sale greater than 0) all filters are optional if not provided, it will return all products from 1 page and 15 limit and sort ascending by price",
         "parameters": [
           {
             "name": "page",
@@ -475,6 +544,73 @@
             "schema": {
               "type": "number",
               "default": 15
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["price", "createdAt"],
+              "default": "price"
+            },
+            "description": "sort by price or created date "
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["asc", "desc"],
+              "default": "asc"
+            },
+            "description": "asc for ascending, desc for descending"
+          },
+          {
+            "name": "brand",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "Nike"
+            }
+          },
+          {
+            "name": "color",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "Червоний"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "example": 40
+            }
+          },
+          {
+            "name": "season",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["Зима", "Літо", "Весна/Осінь"]
+            }
+          },
+          {
+            "name": "sex",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["Чоловік", "Жінка", "Унісекс"]
             }
           }
         ],

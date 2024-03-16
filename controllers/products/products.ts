@@ -1,43 +1,22 @@
-import { Request, Response } from 'express';
 import { Brand, Color, Product, Size } from '../../models/products';
 import ctrlWrapper from '../../utils/ctrlWrapper';
-import { FilterQuery } from 'mongoose';
 
-type SortOrder = 1 | -1;
-interface Query {
-  'categories.brand': string[];
-  'categories.color': string[];
-  'categories.size': string[];
-  'categories.sex'?: string[];
-  'categories.season'?: string[];
-  [key: string]: string[] | undefined;
-}
-interface ReqQuery {
-  page?: string;
-  limit?: string;
-  sort?: 'createdAt' | 'price';
-  order?: 'asc' | 'desc';
-  brand?: string;
-  color?: string;
-  size?: string;
-  sex?: string;
-  season?: string;
-}
+import { Request, Response } from 'express';
+import { FilterQuery } from 'mongoose';
+import { Query, ReqQuery } from '../../types/express';
 
 const products = async (req: Request, res: Response) => {
   const {
     page = 1,
     limit = 15,
     sort = 'createdAt',
-    order,
+    order = 'desc',
     brand,
     color,
     size,
     sex,
     season,
   } = req.query as ReqQuery;
-
-  const orderNumber: number = order === 'desc' ? -1 : 1;
 
   if (+page < 1 || +limit < 1) {
     res.status(400).json({ message: 'Invalid page or limit' });
@@ -74,7 +53,7 @@ const products = async (req: Request, res: Response) => {
     .populate('categories.brand')
     .populate('categories.color')
     .populate('categories.size')
-    .sort({ [sort]: orderNumber as SortOrder });
+    .sort({ [sort]: order as 'asc' | 'desc' });
 
   const totalDoc = await Product.countDocuments(query as Partial<Query>);
   const totalPages = Math.ceil(totalDoc / +limit);

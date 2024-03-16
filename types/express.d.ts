@@ -28,3 +28,22 @@ export interface CustomRequest extends Request {
     authorization?: string;
   };
 }
+export interface Query {
+  'categories.brand': string[];
+  'categories.color': string[];
+  'categories.size': string[];
+  'categories.sex'?: string[];
+  'categories.season'?: string[];
+  [key: string]: string[] | undefined;
+}
+export interface ReqQuery {
+  page?: string;
+  limit?: string;
+  sort?: 'createdAt' | 'price';
+  order?: 'asc' | 'desc';
+  brand?: string;
+  color?: string;
+  size?: string;
+  sex?: string;
+  season?: string;
+}
