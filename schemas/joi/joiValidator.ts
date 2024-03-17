@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-const nameRegex = /^[A-Za-zа-яА-ЯіІїЇєЄ]+(-[A-Za-zа-яА-ЯіІїЇєЄ]+)?$/;
+const nameRegex = /^[A-Za-zа-яА-ЯіІїЇєЄґҐ' ]+(-[A-Za-zа-яА-ЯіІїЇєЄґҐ' ]+)?$/;
 
 export const schemaSignup = Joi.object({
   email: Joi.string()
