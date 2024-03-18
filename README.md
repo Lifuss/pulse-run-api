@@ -1,6 +1,6 @@
 # Pulse&Run API
 
-## Hello there this is API for ed repo [Pulse&Run](https://online-store-front-pulse-nine.vercel.app/#)
+## Hello there this is API for ed project [Pulse&Run](https://online-store-front-pulse-nine.vercel.app/#)
 
 ### Tech stack 
 - TypeScript
