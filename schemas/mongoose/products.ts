@@ -8,7 +8,7 @@ export const productSchema = new Schema(
     sale: { type: Number, default: 0 },
     description: String,
     imgThumbnail: String,
-    article: String,
+    article: { type: String, default: 'DF0001' },
     imgGallery: [String],
     features: [String],
     categories: {

@@ -46,6 +46,7 @@ export const schemaProductCreate = Joi.object({
   name: Joi.string().required(),
   price: Joi.number().required(),
   sale: Joi.number(),
+  article: Joi.string(),
   description: Joi.string().required(),
   features: Joi.array().items(Joi.string()).required(),
   sex: Joi.string().required(),
