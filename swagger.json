@@ -209,8 +209,8 @@
     "/products": {
       "get": {
         "tags": ["Products"],
-        "summary": "Get all products ",
-        "description": "paginated, filtered by category, brand, color, size, season and sort by price, date), all this is not required, if not provided, it will return all products from 1 page and 15 limit",
+        "summary": "Get all products",
+        "description": "paginated, filtered by category(separate by comma without spaces), brand, color, size, season and sort by price, date), all this is not required, if not provided, it will return all products from 1 page and 15 limit",
 
         "parameters": [
           {
@@ -268,7 +268,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "example": "Червоний"
+              "example": "Червоний,Синій"
             }
           },
           {
@@ -295,7 +295,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["Чоловік", "Жінка", "Унісекс"]
+              "enum": ["Чоловік", "Жінка"]
             }
           }
         ],
@@ -417,7 +417,7 @@
       "get": {
         "tags": ["Products"],
         "summary": "Get the newest products",
-        "description": "Get the newest products, all filters are optional if not provided, it will return all products from 1 page and 15 limit and sort by created date",
+        "description": "Get the newest products, all filters(separate by comma without spaces) are optional if not provided, it will return all products from 1 page and 15 limit and sort by created date",
         "parameters": [
           {
             "name": "page",
@@ -474,7 +474,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "example": "Червоний"
+              "example": "Червоний,Синій"
             }
           },
           {
@@ -501,7 +501,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["Чоловік", "Жінка", "Унісекс"]
+              "enum": ["Чоловік", "Жінка"]
             }
           }
         ],
@@ -526,7 +526,7 @@
       "get": {
         "tags": ["Products"],
         "summary": "Get products on sale",
-        "description": "Get products on sale (sale greater than 0) all filters are optional if not provided, it will return all products from 1 page and 15 limit and sort ascending by price",
+        "description": "Get products on sale (sale greater than 0) all filters(separate by comma without spaces) are optional if not provided, it will return all products from 1 page and 15 limit and sort ascending by price",
         "parameters": [
           {
             "name": "page",
@@ -583,7 +583,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "example": "Червоний"
+              "example": "Червоний,Синій"
             }
           },
           {
@@ -610,7 +610,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["Чоловік", "Жінка", "Унісекс"]
+              "enum": ["Чоловік", "Жінка"]
             }
           }
         ],
