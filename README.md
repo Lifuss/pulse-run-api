@@ -11,4 +11,4 @@
 ### How to install 
 - clone repository to local machine
 - `npm build` for install depencices and build the project
-- `npm start` executes server lisener and you ready to use this API locally on your `http://localhost:{port}/api...`
+- `npm start` executes server listener and you ready to use this API locally on your `http://localhost:{port}/api...`
