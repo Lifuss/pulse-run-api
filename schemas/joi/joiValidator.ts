@@ -106,3 +106,7 @@ export const schemaPayment = Joi.object({
     .pattern(/^[0-9]+$/)
     .required(),
 });
+
+export const schemaFavorite = Joi.object({
+  productId: Joi.string().hex().length(24),
+});

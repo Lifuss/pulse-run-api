@@ -57,12 +57,12 @@ const userSchema = new Schema(
         },
       },
     ],
-    buyHistory: {
-      type: [String],
-    },
-    favoriteProducts: {
-      type: [String],
-    },
+    favoriteProducts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Product',
+      },
+    ],
     resetPasswordToken: {
       type: String,
     },

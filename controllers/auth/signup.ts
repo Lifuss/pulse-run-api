@@ -22,7 +22,7 @@ const signup = async (req: Request, res: Response) => {
     },
   });
 
-  const { profile, _id, avatar } = newUser;
+  const { profile, _id, avatar, favoriteProducts } = newUser;
 
   const payload = {
     id: _id,
@@ -31,7 +31,9 @@ const signup = async (req: Request, res: Response) => {
   const token = jwt.sign(payload, secretKey, { expiresIn: '24h' });
 
   await User.findByIdAndUpdate(_id, { token });
-  res.status(201).json({ token, user: { ...profile, avatar, email } });
+  res
+    .status(201)
+    .json({ token, user: { ...profile, avatar, email }, favoriteProducts });
 };
 
 export default ctrlWrapper(signup);

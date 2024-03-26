@@ -1,6 +1,7 @@
 import express from 'express';
 import validateBody from '../middlewares/validateBody';
 import {
+  schemaFavorite,
   schemaPayment,
   schemaSubscribe,
   schemaSupport,
@@ -16,6 +17,8 @@ import upload from '../middlewares/upload';
 import createSupportTicket from '../controllers/users/supportTicket';
 import addPayment from '../controllers/users/addPayment';
 import deletePayment from '../controllers/users/deletePayment';
+import addFavorite from '../controllers/users/addFavorite';
+import deleteFavorite from '../controllers/users/deleteFavorite';
 
 const router = express.Router();
 
@@ -29,6 +32,18 @@ router.patch(
   upload.single('avatar'),
   validateBody(schemaUpdateUser),
   updateUser,
+);
+router.patch(
+  '/favorites',
+  authentication,
+  validateBody(schemaFavorite),
+  addFavorite,
+);
+router.delete(
+  '/favorites',
+  authentication,
+  validateBody(schemaFavorite),
+  deleteFavorite,
 );
 router.post(
   '/payments',

@@ -45,7 +45,8 @@
                   },
                   "password": {
                     "type": "string",
-                    "example": "password123"
+                    "example": "paSsword123",
+                    "description": "Must contain at least one uppercase letter (?=.*[A-Z]) one lowercase letter (?=.*[a-z]) between 8 and 16 characters in length [A-Za-z\\d]{8,16} Only allows alphanumeric characters [A-Za-z\\d]"
                   }
                 }
               }
@@ -91,7 +92,8 @@
                   },
                   "password": {
                     "type": "string",
-                    "example": "password123"
+                    "example": "paSsword123",
+                    "description": "Must contain at least one uppercase letter (?=.*[A-Z]) one lowercase letter (?=.*[a-z]) between 8 and 16 characters in length [A-Za-z\\d]{8,16} Only allows alphanumeric characters [A-Za-z\\d]"
                   },
                   "firstName": {
                     "type": "string",
@@ -1095,6 +1097,99 @@
         }
       }
     },
+    "/users/favorites": {
+      "patch": {
+        "tags": ["User"],
+        "summary": "Add product to favorites",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": ["productId"],
+                "type": "object",
+                "properties": {
+                  "productId": {
+                    "type": "string",
+                    "example": "65de225d1777648afb13c3b4"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "65de225d1777648afb13c3b4"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "409": {
+            "description": "Conflict (Product already in favorites)"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["User"],
+        "summary": "Remove product from favorites",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": ["productId"],
+                "type": "object",
+                "properties": {
+                  "productId": {
+                    "type": "string",
+                    "example": "65de225d1777648afb13c3b4"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "65de225d1777648afb13c3b4"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found (Product not found in favorites)"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
     "/users/reset-password": {
       "patch": {
         "tags": ["User"],
@@ -1178,6 +1273,13 @@
               "phone": {
                 "type": "string"
               }
+            }
+          },
+          "favoriteProducts": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": "65de225d1777648afb13c3b4"
             }
           }
         }

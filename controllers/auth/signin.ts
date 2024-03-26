@@ -12,7 +12,7 @@ const signIn = async (req: Request, res: Response): Promise<void> => {
     return;
   }
 
-  const { profile, avatar, _id } = user;
+  const { profile, avatar, _id, favoriteProducts } = user;
 
   const isPasswordValid = await bcryptjs.compare(password, user.password);
   if (!isPasswordValid) {
@@ -28,7 +28,9 @@ const signIn = async (req: Request, res: Response): Promise<void> => {
 
   await User.findByIdAndUpdate(_id, { token });
 
-  res.status(200).json({ token, user: { ...profile, email, avatar } });
+  res
+    .status(200)
+    .json({ token, user: { ...profile, avatar, email }, favoriteProducts });
 };
 
 export default ctrlWrapper(signIn);

@@ -7,7 +7,9 @@ const current = async (req: CustomRequest, res: Response) => {
     res.status(401).json({ message: 'Unauthorized' });
     return;
   }
-  const { email, token, profile } = req.user;
-  res.status(200).json({ token, user: { ...profile, email } });
+  const { email, token, profile, avatar, favoriteProducts } = req.user;
+  res
+    .status(200)
+    .json({ token, user: { ...profile, avatar, email }, favoriteProducts });
 };
 export default ctrlWrapper(current);

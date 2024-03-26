@@ -22,6 +22,7 @@ router.get(
     scope: ['profile', 'email'],
   }),
 );
+
 router.get(
   '/google/callback',
   passportGoogle.authenticate('google', { session: false }),
