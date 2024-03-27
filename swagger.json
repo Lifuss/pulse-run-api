@@ -131,10 +131,10 @@
     "/auth/google": {
       "get": {
         "tags": ["Auth"],
-        "summary": "Login with Google",
+        "summary": "Login with Google (OAuth2)",
         "responses": {
           "302": {
-            "description": "Redirect to Google login page. After successful login, user will be redirected to the frontend app with token in the URL. Example('https://example.com?token={token}')"
+            "description": "Redirect to Google login page. After successful login, user will be redirected to the frontend app with token in the URL. Example('https://example.com?token={token}') data flow frontend - backend - google OAuth2 - backend - frontend"
           }
         }
       }
@@ -145,7 +145,7 @@
         "summary": "Login with Facebook",
         "responses": {
           "302": {
-            "description": "Redirect to Facebook login page. After successful login, user will be redirected to the frontend app with token in the URL. Example('https://example.com?token={token}')"
+            "description": "Redirect to Facebook login page. After successful login, user will be redirected to the frontend app with token in the URL. Example('https://example.com?token={token}') data flow frontend - backend - google OAuth2 - backend - frontend"
           }
         }
       }
