@@ -2,6 +2,8 @@
 
 ## Hello there this is API for ed project [Pulse&Run](https://online-store-front-pulse-nine.vercel.app/#)
 
+You can inspect endpoints online on [swagger](https://pulse-run-api.onrender.com/api-docs/) or run project loccaly and go to `http://localhost:{port}/api-docs`
+
 ### Tech stack 
 - TypeScript
 - Node.js
