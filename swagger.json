@@ -1298,10 +1298,17 @@
           },
           "price": {
             "type": "number",
-            "example": 1250
+            "example": 1600,
+            "description": "price with sale"
+          },
+          "basePrice": {
+            "type": "number",
+            "example": 2000,
+            "description": "full price without sale"
           },
           "sale": {
             "type": "number",
+            "example": 20,
             "description": "0 as no sale, more than 0 is as percent from full price"
           },
           "category": {
