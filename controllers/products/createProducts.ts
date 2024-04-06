@@ -54,10 +54,12 @@ const createProducts = async (req: Request, res: Response) => {
   const imgGallery = imgGalleryUrl.map((img) => img.secure_url);
 
   const colorArray: Types.ObjectId[] = [];
-  for (let i = 0; i < color.length; i++) {
-    const checkColor = await Color.findOne({ name: color[i] });
+  const uniqueColors = Array.from(new Set(color));
+
+  for (let i = 0; i < uniqueColors.length; i++) {
+    const checkColor = await Color.findOne({ name: uniqueColors[i] });
     if (!checkColor) {
-      const newColor = await Color.create({ name: color[i] });
+      const newColor = await Color.create({ name: uniqueColors[i] });
       colorArray.push(newColor._id);
     } else {
       colorArray.push(checkColor._id);
@@ -65,10 +67,12 @@ const createProducts = async (req: Request, res: Response) => {
   }
 
   const sizeArray: Types.ObjectId[] = [];
-  for (let i = 0; i < size.length; i++) {
-    const checkSize = await Size.findOne({ value: size[i] });
+  const uniqueSizes = Array.from(new Set(size));
+
+  for (let i = 0; i < uniqueSizes.length; i++) {
+    const checkSize = await Size.findOne({ value: uniqueSizes[i] });
     if (!checkSize) {
-      const newSize = await Size.create({ value: size[i] });
+      const newSize = await Size.create({ value: uniqueSizes[i] });
       sizeArray.push(newSize._id);
     } else {
       sizeArray.push(checkSize._id);

@@ -2,35 +2,38 @@ import { Request, Response } from 'express';
 import { Product } from '../../models/products';
 
 const updatePrices = async (req: Request, res: Response) => {
-  const products = await Product.aggregate([
-    {
-      $addFields: {
-        price: {
-          $cond: {
-            if: { $eq: ['$sale', 0] },
-            then: '$basePrice',
-            else: {
-              $subtract: [
-                '$basePrice',
-                { $multiply: ['$basePrice', { $divide: ['$sale', 100] }] },
-              ],
+  try {
+    await Product.aggregate([
+      {
+        $addFields: {
+          price: {
+            $cond: {
+              if: { $eq: ['$sale', 0] },
+              then: '$basePrice',
+              else: {
+                $ceil: {
+                  $subtract: [
+                    '$basePrice',
+                    { $multiply: ['$basePrice', { $divide: ['$sale', 100] }] },
+                  ],
+                },
+              },
             },
           },
         },
       },
-    },
-  ]);
+      {
+        $out: 'products',
+      },
+    ]);
 
-  const bulkOps = products.map((product) => ({
-    updateOne: {
-      filter: { _id: product._id },
-      update: { price: product.price },
-    },
-  }));
-
-  await Product.bulkWrite(bulkOps);
-
-  res.json({ message: 'Prices updated successfully' });
+    res.json({ message: 'Prices updated successfully' });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ message: 'An error occurred while updating prices' });
+  }
 };
 
 export default updatePrices;
