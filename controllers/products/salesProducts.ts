@@ -59,7 +59,8 @@ const getSale = async (req: Request, res: Response) => {
 
   const totalDoc = await Product.countDocuments(query as Partial<Query>);
   const totalPages = Math.ceil(totalDoc / +limit);
-  res.json({ page, limit, totalPages, products });
+  
+res.json({ page: +page, limit: +limit, totalPages, products });
 };
 
 export default ctrlWrapper(getSale);

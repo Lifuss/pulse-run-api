@@ -19,7 +19,7 @@ const getSearchProducts = async (req: Request, res: Response) => {
   });
   const totalPages = Math.ceil(totalDoc / +limit);
 
-  res.status(200).json({ page, limit, totalPages, products });
+res.json({ page: +page, limit: +limit, totalPages, products });
 };
 
 export default ctrlWrapper(getSearchProducts);
