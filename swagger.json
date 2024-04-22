@@ -696,7 +696,7 @@
     "/products/create": {
       "post": {
         "tags": ["Products"],
-        "summary": "Create a product",
+        "summary": "Create a product (Admin only, not a part of the frontend app)",
         "requestBody": {
           "content": {
             "multipart/form-data": {
@@ -1098,6 +1098,46 @@
       }
     },
     "/users/favorites": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get favorite products",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "404": {
+            "description": "No favorite products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "No favorite products"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
       "patch": {
         "tags": ["User"],
         "summary": "Add product to favorites",

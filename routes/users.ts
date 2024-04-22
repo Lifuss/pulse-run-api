@@ -19,9 +19,10 @@ import addPayment from '../controllers/users/addPayment';
 import deletePayment from '../controllers/users/deletePayment';
 import addFavorite from '../controllers/users/addFavorite';
 import deleteFavorite from '../controllers/users/deleteFavorite';
+import getFavorites from '../controllers/users/getFavorites';
 
 const router = express.Router();
-
+router.get('/favorites', authentication, getFavorites);
 router.post('/subscribe', validateBody(schemaSubscribe), subscribeEmail);
 router.delete('/', authentication, deleteUser);
 router.post('/forgot-password', forgotPassword);
