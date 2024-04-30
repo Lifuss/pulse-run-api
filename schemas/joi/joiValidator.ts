@@ -107,6 +107,35 @@ export const schemaPayment = Joi.object({
     .required(),
 });
 
-export const schemaFavorite = Joi.object({
-  productId: Joi.string().hex().length(24),
+export const orderJoiSchema = Joi.object({
+  user: Joi.string(),
+  products: Joi.array().items(
+    Joi.object({
+      productId: Joi.string()
+        .required()
+        .error(new Error('productId is required')),
+      quantity: Joi.number()
+        .required()
+        .error(new Error('Quantity is required')),
+      size: Joi.string().required().error(new Error('Size is required')),
+    }),
+  ),
+  orderDate: Joi.date().default(Date.now),
+  deliveryAddress: Joi.string()
+    .required()
+    .error(new Error('Delivery address is required')),
+  deliveryDate: Joi.date()
+    .required()
+    .error(new Error('Delivery date is required')),
+  paymentMethod: Joi.string()
+    .valid('card', 'cash')
+    .required()
+    .error(new Error('Payment method is required')),
+  promoCode: Joi.string(),
+  email: Joi.string().email().required().error(new Error('Email is required')),
+  phone: Joi.string()
+    .pattern(/^[0-9]+$/)
+    .required()
+    .error(new Error('Phone is required')),
+  name: Joi.string().required().error(new Error('Name is required')),
 });

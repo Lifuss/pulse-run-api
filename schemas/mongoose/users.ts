@@ -37,6 +37,7 @@ const userSchema = new Schema(
       type: String,
       default: '',
     },
+    usedPromos: [{ type: Schema.Types.ObjectId, ref: 'PromoCode' }],
     payment: [
       {
         cardNumber: {

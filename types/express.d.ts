@@ -47,3 +47,20 @@ export interface ReqQuery {
   sex?: string;
   season?: string;
 }
+
+export interface TOrder {
+  user?: string;
+  products: Array<{
+    productId: string;
+    quantity: number;
+    size: string;
+  }>;
+  orderDate?: Date;
+  deliveryAddress: string;
+  deliveryDate: Date;
+  paymentMethod: 'card' | 'cash';
+  promoCode?: string;
+  email: string;
+  phone: string;
+  name: string;
+}
