@@ -1,5 +1,5 @@
-const { model } = require('mongoose');
-const { promoCodeSchema } = require('../schemas/mongoose/promoCodes');
+import { model } from 'mongoose';
+import { promoCodeSchema } from '../schemas/mongoose/promoCode';
 
 const PromoCode = model('PromoCode', promoCodeSchema);
 

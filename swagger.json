@@ -2,7 +2,7 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Pulse&Run API",
-    "version": "1.0"
+    "version": "2.0"
   },
   "servers": [
     {
@@ -787,6 +787,355 @@
           },
           "400": {
             "description": "Bad Request"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/products/orders": {
+      "post": {
+        "tags": ["Products"],
+        "summary": "Create an order (logic have some differences when user is logged in and when user is not logged in)",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": {
+                    "type": "string"
+                  },
+                  "products": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "productId": {
+                          "type": "string"
+                        },
+                        "quantity": {
+                          "type": "number"
+                        },
+                        "priceByOne": {
+                          "type": "number"
+                        },
+                        "sizeId": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "productId",
+                        "quantity",
+                        "priceByOne",
+                        "sizeId"
+                      ]
+                    }
+                  },
+                  "priceSum": {
+                    "type": "number"
+                  },
+                  "orderDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "ISO 8601 format no required, will be added automatically but can be provided for client needs (for example, to set the order date in the past)"
+                  },
+                  "deliveryAddress": {
+                    "type": "string"
+                  },
+                  "deliveryDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "paymentMethod": {
+                    "type": "string",
+                    "enum": ["card", "cash"]
+                  },
+                  "promoCode": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "phone": {
+                    "type": "string",
+                    "pattern": "^\\+?3?8?(0\\d{9})$"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "products",
+                  "priceSum",
+                  "orderDate",
+                  "deliveryAddress",
+                  "deliveryDate",
+                  "paymentMethod",
+                  "email",
+                  "phone",
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "userId": {
+                      "type": "string"
+                    },
+                    "products": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "productId": {
+                            "type": "string"
+                          },
+                          "quantity": {
+                            "type": "integer"
+                          },
+                          "priceByOne": {
+                            "type": "integer"
+                          },
+                          "sizeId": {
+                            "type": "string"
+                          },
+                          "_id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "productId",
+                          "quantity",
+                          "priceByOne",
+                          "sizeId",
+                          "_id"
+                        ]
+                      }
+                    },
+                    "priceSum": {
+                      "type": "integer"
+                    },
+                    "deliveryAddress": {
+                      "type": "string"
+                    },
+                    "deliveryDate": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "paymentMethod": {
+                      "type": "string",
+                      "enum": ["card", "cash"]
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": ["pending", "completed", "cancelled"]
+                    },
+                    "email": {
+                      "type": "string",
+                      "format": "email"
+                    },
+                    "phone": {
+                      "type": "string",
+                      "pattern": "^\\+?3?8?(0\\d{9})$"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "_id": {
+                      "type": "string"
+                    },
+                    "promoCode": { "type": "string" },
+                    "orderDate": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  },
+                  "required": [
+                    "userId",
+                    "products",
+                    "priceSum",
+                    "deliveryAddress",
+                    "deliveryDate",
+                    "paymentMethod",
+                    "status",
+                    "email",
+                    "phone",
+                    "name",
+                    "_id",
+                    "orderDate",
+                    "createdAt",
+                    "updatedAt"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Possible reasons: Invalid promo code, Promo code is not active, Promo code is expired, Promo code is already used",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Order creation failed, order was not created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Products"],
+        "summary": "Get all user orders",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "buyHistory": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string"
+                          },
+                          "products": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "productId": {
+                                  "type": "object",
+                                  "properties": {
+                                    "_id": { "type": "string" },
+                                    "name": { "type": "string" },
+                                    "imgThumbnail": { "type": "string" }
+                                  }
+                                },
+                                "quantity": {
+                                  "type": "number"
+                                },
+                                "priceByOne": {
+                                  "type": "number"
+                                },
+                                "sizeId": {
+                                  "type": "string"
+                                },
+                                "_id": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/products/orders/{code}": {
+      "get": {
+        "tags": ["Products"],
+        "summary": "Check Promo code",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "discount": {
+                      "type": "number"
+                    },
+                    "isActive": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found (Invalid promo code)"
+          },
+          "400": {
+            "description": "Bad Request (Promo code is expired, Promo code is not active, Promo code is already used)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "security": [

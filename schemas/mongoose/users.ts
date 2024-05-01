@@ -19,6 +19,7 @@ const userSchema = new Schema(
       type: String,
       default: null,
     },
+    buyHistory: [{ type: Schema.Types.ObjectId, ref: 'Order' }],
     profile: {
       firstName: {
         type: String,
@@ -37,7 +38,6 @@ const userSchema = new Schema(
       type: String,
       default: '',
     },
-    usedPromos: [{ type: Schema.Types.ObjectId, ref: 'PromoCode' }],
     payment: [
       {
         cardNumber: {

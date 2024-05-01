@@ -1,4 +1,5 @@
 import { Request } from 'express';
+import { Types } from 'mongoose';
 import { User as PassportUser } from 'passport';
 
 export interface IUser {
@@ -7,6 +8,7 @@ export interface IUser {
   password: string;
   roles: string[];
   token: string;
+  buyHistory: string[];
   profile: {
     firstName: string;
     lastName: string;
@@ -49,7 +51,7 @@ export interface ReqQuery {
 }
 
 export interface TOrder {
-  user?: string;
+  userId?: string;
   products: Array<{
     productId: string;
     quantity: number;
@@ -59,7 +61,7 @@ export interface TOrder {
   deliveryAddress: string;
   deliveryDate: Date;
   paymentMethod: 'card' | 'cash';
-  promoCode?: string;
+  promoCode?: string | Types.ObjectId;
   email: string;
   phone: string;
   name: string;

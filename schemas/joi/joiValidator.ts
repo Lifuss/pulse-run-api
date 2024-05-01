@@ -108,7 +108,7 @@ export const schemaPayment = Joi.object({
 });
 
 export const orderJoiSchema = Joi.object({
-  user: Joi.string(),
+  userId: Joi.string(),
   products: Joi.array().items(
     Joi.object({
       productId: Joi.string()
@@ -117,9 +117,13 @@ export const orderJoiSchema = Joi.object({
       quantity: Joi.number()
         .required()
         .error(new Error('Quantity is required')),
-      size: Joi.string().required().error(new Error('Size is required')),
+      priceByOne: Joi.number()
+        .required()
+        .error(new Error('Price by one is required')),
+      sizeId: Joi.string().required().error(new Error('sizeId is required')),
     }),
   ),
+  priceSum: Joi.number().required().error(new Error('Final price is required')),
   orderDate: Joi.date().default(Date.now),
   deliveryAddress: Joi.string()
     .required()
@@ -138,4 +142,8 @@ export const orderJoiSchema = Joi.object({
     .required()
     .error(new Error('Phone is required')),
   name: Joi.string().required().error(new Error('Name is required')),
+});
+
+export const schemaFavorite = Joi.object({
+  productId: Joi.string().hex().length(24),
 });

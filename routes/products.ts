@@ -14,6 +14,10 @@ import getById from '../controllers/products/getById';
 import getSearchProducts from '../controllers/products/getSearchProducts';
 import updatePrices from '../controllers/products/updatePrices';
 import createOrder from '../controllers/products/createOrder';
+import authentication from '../middlewares/authentication';
+import getOrderHistory from '../controllers/products/getOrderHistory';
+import createPromoCode from '../controllers/products/createPromoCode';
+import checkPromoCode from '../controllers/products/checkPromoCode';
 
 const router = Router();
 
@@ -30,6 +34,10 @@ router.post(
   createProducts,
 );
 router.post('/orders', validateBody(orderJoiSchema), createOrder);
+router.get('/orders', authentication, getOrderHistory);
+router.get('/orders/:code', authentication, checkPromoCode);
+
+router.post('/promo', createPromoCode);
 
 router.get('/newest', getNewProducts);
 router.get('/sales', getProductsOnSale);
