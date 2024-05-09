@@ -69,7 +69,7 @@ export const schemaUpdateUser = Joi.object({
     .regex(/^(?=.*[A-Z])(?=.*[a-z])[A-Za-z\d]{8,16}$/),
   firstName: Joi.string().regex(nameRegex).min(1).max(30),
   lastName: Joi.string().regex(nameRegex).min(1).max(30),
-  phone: Joi.string().regex(/^\d{9}$/),
+  phone: Joi.string().regex(/^\+\d{9,20}$/),
 });
 
 export const schemaSupport = Joi.object({
