@@ -72,4 +72,5 @@ export interface TOrder {
   email: string;
   phone: string;
   name: string;
+  isMailing?: boolean;
 }

@@ -4,6 +4,7 @@ import { TOrder } from '../../types/express';
 import User from '../../models/user';
 import ctrlWrapper from '../../utils/ctrlWrapper';
 import PromoCode from '../../models/promoCodes';
+import Mailing from '../../models/mailing';
 // import { Types } from 'mongoose';
 
 const createOrder = async (req: Request, res: Response) => {
@@ -45,6 +46,12 @@ const createOrder = async (req: Request, res: Response) => {
     //   $push: { usedBy: orderBody.userId },
     // });
     orderBody.promoCode = promoCodeDoc._id;
+  }
+  if (orderBody.isMailing) {
+    await Mailing.create({
+      email: orderBody.email,
+      name: orderBody.name,
+    });
   }
 
   const order = await Order.create(orderBody);

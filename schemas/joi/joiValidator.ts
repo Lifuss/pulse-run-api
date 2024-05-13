@@ -54,6 +54,7 @@ export const schemaProductCreate = Joi.object({
   size: Joi.array().items(Joi.number()).required(),
   brand: Joi.string().required(),
   color: Joi.array().items(Joi.string()).required(),
+  isMailing: Joi.boolean().default(false),
 });
 
 export const schemaUpdateUser = Joi.object({

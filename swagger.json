@@ -879,6 +879,11 @@
                   },
                   "name": {
                     "type": "string"
+                  },
+                  "isMailing": {
+                    "description": "If true, user will be subscribed to the newsletter",
+                    "type": "boolean",
+                    "default": false
                   }
                 },
                 "required": [
