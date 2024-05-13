@@ -4,7 +4,7 @@ import { TOrder } from '../../types/express';
 import User from '../../models/user';
 import ctrlWrapper from '../../utils/ctrlWrapper';
 import PromoCode from '../../models/promoCodes';
-import { Types } from 'mongoose';
+// import { Types } from 'mongoose';
 
 const createOrder = async (req: Request, res: Response) => {
   const orderBody = req.body as TOrder;
@@ -35,13 +35,15 @@ const createOrder = async (req: Request, res: Response) => {
       res.status(400).json({ message: 'Promo code is expired' });
       return;
     }
-    if (promoCodeDoc.usedBy.includes(new Types.ObjectId(orderBody.userId))) {
-      res.status(400).json({ message: 'Promo code is already used' });
-      return;
-    }
-    await PromoCode.findByIdAndUpdate(promoCodeDoc._id, {
-      $push: { usedBy: orderBody.userId },
-    });
+
+    // Simplify the code by removing the check for the user for development purposes
+    // if (promoCodeDoc.usedBy.includes(new Types.ObjectId(orderBody.userId))) {
+    //   res.status(400).json({ message: 'Promo code is already used' });
+    //   return;
+    // }
+    // await PromoCode.findByIdAndUpdate(promoCodeDoc._id, {
+    //   $push: { usedBy: orderBody.userId },
+    // });
     orderBody.promoCode = promoCodeDoc._id;
   }
 

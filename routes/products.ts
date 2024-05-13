@@ -33,16 +33,16 @@ router.post(
   validateBody(schemaProductCreate),
   createProducts,
 );
-router.post('/orders', validateBody(orderJoiSchema), createOrder);
 router.get('/orders', authentication, getOrderHistory);
-router.get('/orders/:code', authentication, checkPromoCode);
-
-router.post('/promo', createPromoCode);
-
+router.get('/orders/:code', checkPromoCode);
+// router.get('/orders/:code', authentication, checkPromoCode);
 router.get('/newest', getNewProducts);
 router.get('/sales', getProductsOnSale);
 router.get('/search', getSearchProducts);
 router.get('/update-prices', updatePrices);
 router.get('/:id', getById);
+
+router.post('/orders', validateBody(orderJoiSchema), createOrder);
+router.post('/promo', createPromoCode);
 
 export default router;

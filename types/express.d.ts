@@ -14,6 +14,13 @@ export interface IUser {
     lastName: string;
     phone: string;
   };
+  payment: Array<{
+    _id: string;
+    cardNumber: string;
+    cardName: string;
+    cardDate: string;
+    cardCVC: string;
+  }>;
   avatar: string;
   buyHistory: string[];
   favoriteProducts: string[];

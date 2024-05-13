@@ -15,17 +15,28 @@ import resetPassword from '../controllers/users/resetPassword';
 import updateUser from '../controllers/users/updateUser';
 import upload from '../middlewares/upload';
 import createSupportTicket from '../controllers/users/supportTicket';
-import addPayment from '../controllers/users/addPayment';
-import deletePayment from '../controllers/users/deletePayment';
+import addPayment from '../controllers/users/payments/addPayment';
+import deletePayment from '../controllers/users/payments/deletePayment';
 import addFavorite from '../controllers/users/addFavorite';
 import deleteFavorite from '../controllers/users/deleteFavorite';
 import getFavorites from '../controllers/users/getFavorites';
+import getPayments from '../controllers/users/payments/getPayments';
 
 const router = express.Router();
+
 router.get('/favorites', authentication, getFavorites);
+router.get('/payments', authentication, getPayments);
+
 router.post('/subscribe', validateBody(schemaSubscribe), subscribeEmail);
-router.delete('/', authentication, deleteUser);
 router.post('/forgot-password', forgotPassword);
+router.post('/supports', validateBody(schemaSupport), createSupportTicket);
+router.post(
+  '/payments',
+  authentication,
+  validateBody(schemaPayment),
+  addPayment,
+);
+
 router.patch('/reset-password', resetPassword);
 router.patch(
   '/',
@@ -40,18 +51,14 @@ router.patch(
   validateBody(schemaFavorite),
   addFavorite,
 );
+
 router.delete(
   '/favorites',
   authentication,
   validateBody(schemaFavorite),
   deleteFavorite,
 );
-router.post(
-  '/payments',
-  authentication,
-  validateBody(schemaPayment),
-  addPayment,
-);
+router.delete('/', authentication, deleteUser);
 router.delete('/payments/:paymentId', authentication, deletePayment);
-router.post('/supports', validateBody(schemaSupport), createSupportTicket);
+
 export default router;

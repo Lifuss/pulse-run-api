@@ -22,8 +22,20 @@
       "description": "user management"
     },
     {
+      "name": "user/payments",
+      "description": "user payments"
+    },
+    {
+      "name": "user/favorites",
+      "description": "user favorites"
+    },
+    {
       "name": "Products",
       "description": "product management"
+    },
+    {
+      "name": "products/orders",
+      "description": "order management"
     }
   ],
   "paths": {
@@ -798,7 +810,7 @@
     },
     "/products/orders": {
       "post": {
-        "tags": ["Products"],
+        "tags": ["products/orders"],
         "summary": "Create an order (logic have some differences when user is logged in and when user is not logged in)",
         "requestBody": {
           "content": {
@@ -1024,7 +1036,7 @@
         }
       },
       "get": {
-        "tags": ["Products"],
+        "tags": ["products/orders"],
         "summary": "Get all user orders",
         "responses": {
           "200": {
@@ -1088,7 +1100,7 @@
     },
     "/products/orders/{code}": {
       "get": {
-        "tags": ["Products"],
+        "tags": ["products/orders"],
         "summary": "Check Promo code",
         "parameters": [
           {
@@ -1261,9 +1273,67 @@
       }
     },
     "/users/payments": {
+      "get": {
+        "tags": ["user/payments"],
+        "summary": "Get user payments",
+        "description": "if param cardNumber is empty, it will return all user payments, if cardNumber is provided, it will filter by cardNumber",
+        "parameters": [
+          {
+            "name": "cardNumber",
+            "in": "query",
+            "description": "Card number may be a part of the card number, for example, 4111 or 13",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "4111111111111113"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string"
+                      },
+                      "cardNumber": {
+                        "type": "string"
+                      },
+                      "cardName": {
+                        "type": "string"
+                      },
+                      "cardDate": {
+                        "type": "string"
+                      },
+                      "cardCVC": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
       "post": {
-        "tags": ["User"],
+        "tags": ["user/payments"],
         "summary": "Add new payment",
+        "description": "Add new payment card to user profile. If card already exists, it will return 409 status code, when success, it will return all user payments",
         "requestBody": {
           "content": {
             "application/json": {
@@ -1298,11 +1368,25 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Payment added successfully"
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string"
+                      },
+                      "cardNumber": {
+                        "type": "string"
+                      },
+                      "cardName": {
+                        "type": "string"
+                      },
+                      "cardDate": {
+                        "type": "string"
+                      },
+                      "cardCVC": {
+                        "type": "string"
+                      }
                     }
                   }
                 }
@@ -1325,8 +1409,9 @@
     },
     "/users/payments/{paymentId}": {
       "delete": {
-        "tags": ["User"],
+        "tags": ["user/payments"],
         "summary": "Delete payment",
+        "description": "Delete payment card from user profile by paymentId when success, it will return all user payments without deleted card",
         "parameters": [
           {
             "name": "paymentId",
@@ -1339,8 +1424,35 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Success"
+          "200": {
+            "description": "Delete success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string"
+                      },
+                      "cardNumber": {
+                        "type": "string"
+                      },
+                      "cardName": {
+                        "type": "string"
+                      },
+                      "cardDate": {
+                        "type": "string"
+                      },
+                      "cardCVC": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
           },
           "404": {
             "description": "Not Found (Card not found)"
@@ -1448,7 +1560,7 @@
     },
     "/users/favorites": {
       "get": {
-        "tags": ["User"],
+        "tags": ["user/favorites"],
         "summary": "Get favorite products",
         "responses": {
           "200": {
@@ -1488,7 +1600,7 @@
         ]
       },
       "patch": {
-        "tags": ["User"],
+        "tags": ["user/favorites"],
         "summary": "Add product to favorites",
         "requestBody": {
           "content": {
@@ -1535,7 +1647,7 @@
         ]
       },
       "delete": {
-        "tags": ["User"],
+        "tags": ["user/favorites"],
         "summary": "Remove product from favorites",
         "requestBody": {
           "content": {

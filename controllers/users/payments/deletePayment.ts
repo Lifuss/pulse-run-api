@@ -1,11 +1,12 @@
 import { Response } from 'express';
-import User from '../../models/user';
-import ctrlWrapper from '../../utils/ctrlWrapper';
-import { CustomRequest } from '../../types/express';
+import User from '../../../models/user';
+import ctrlWrapper from '../../../utils/ctrlWrapper';
+import { CustomRequest } from '../../../types/express';
 
 const deletePayment = async (req: CustomRequest, res: Response) => {
   const { _id } = req.user;
   const { paymentId } = req.params;
+  console.log('paymentId', paymentId);
 
   const user = await User.findById(_id);
   if (!user) {
@@ -25,7 +26,7 @@ const deletePayment = async (req: CustomRequest, res: Response) => {
 
   await user.save();
 
-  res.status(204).end();
+  res.status(200).json(user.payment);
 };
 
 export default ctrlWrapper(deletePayment);

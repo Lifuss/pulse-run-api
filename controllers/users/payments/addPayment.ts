@@ -1,7 +1,7 @@
 import { Response } from 'express';
-import User from '../../models/user';
-import ctrlWrapper from '../../utils/ctrlWrapper';
-import { CustomRequest } from '../../types/express';
+import User from '../../../models/user';
+import ctrlWrapper from '../../../utils/ctrlWrapper';
+import { CustomRequest } from '../../../types/express';
 
 const addPayment = async (req: CustomRequest, res: Response) => {
   const { _id } = req.user;
@@ -24,7 +24,7 @@ const addPayment = async (req: CustomRequest, res: Response) => {
 
   user.payment.push(payment);
   await user.save();
-  res.status(201).json({ message: 'Payment added successfully' });
+  res.status(201).json(user.payment);
 };
 
 export default ctrlWrapper(addPayment);
