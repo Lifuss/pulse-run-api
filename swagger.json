@@ -1004,7 +1004,7 @@
             }
           },
           "400": {
-            "description": "Bad Request. Possible reasons: Invalid promo code, Promo code is not active, Promo code is expired, Promo code is already used",
+            "description": "Bad Request. Possible reasons: Invalid promo code, Promo code is not active, Promo code is expired",
             "content": {
               "application/json": {
                 "schema": {
@@ -1135,7 +1135,7 @@
             "description": "Not Found (Invalid promo code)"
           },
           "400": {
-            "description": "Bad Request (Promo code is expired, Promo code is not active, Promo code is already used)",
+            "description": "Bad Request (Promo code is expired, Promo code is not active)",
             "content": {
               "application/json": {
                 "schema": {
@@ -1149,12 +1149,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        }
       }
     },
     "/users": {
