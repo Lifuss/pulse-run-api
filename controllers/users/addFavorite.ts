@@ -11,7 +11,15 @@ const addFavorite = async (req: CustomRequest, res: Response) => {
   };
   const { productId } = req.body as { productId: string };
 
-  if (favoriteProducts.find((id) => id.toString() === productId)) {
+  if (!productId) {
+    res.status(400).json({ message: 'Product ID is required' });
+    return;
+  }
+
+  if (
+    favoriteProducts.length &&
+    favoriteProducts.find((id) => id.toString() === productId)
+  ) {
     res.status(409).json({ message: 'Product already exists in favorites' });
     return;
   }
