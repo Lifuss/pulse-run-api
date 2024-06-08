@@ -53,12 +53,13 @@
                   "email": {
                     "type": "string",
                     "format": "email",
-                    "example": "example@gmail.com"
+                    "example": "example@gmail.com",
+                    "description": "1. The local part (before the @ symbol) can contain one or more alphanumeric characters, as well as the special characters . ! # $ % & ' * + / = ? ^ _ ` { | } ~ -.,\n2. The @ symbol is required. \n3. The domain part (after the @ symbol and before the dot) can contain one or more alphanumeric characters, as well as the hyphen (-). \n4. The top-level domain (after the dot) can contain two or more alphanumeric characters or hyphens. This allows for subdomains and top-level domains like .com, .net, etc. but .ru is banned"
                   },
                   "password": {
                     "type": "string",
                     "example": "paSsword123",
-                    "description": "Must contain at least one uppercase letter (?=.*[A-Z]) one lowercase letter (?=.*[a-z]) between 8 and 16 characters in length [A-Za-z\\d]{8,16} Only allows alphanumeric characters [A-Za-z\\d]"
+                    "description": "\n 1. between 8 and 16 characters in length, Only allows alphanumeric characters \n 3. at least one uppercase letter  \n 4. one lowercase letter"
                   }
                 }
               }
@@ -100,20 +101,23 @@
                   "email": {
                     "type": "string",
                     "format": "email",
-                    "example": "example@gamil.com"
+                    "example": "example@gamil.com",
+                    "description": "1. The local part (before the @ symbol) can contain one or more alphanumeric characters, as well as the special characters . ! # $ % & ' * + / = ? ^ _ ` { | } ~ -.,\n2. The @ symbol is required. \n3. The domain part (after the @ symbol and before the dot) can contain one or more alphanumeric characters, as well as the hyphen (-). \n4. The top-level domain (after the dot) can contain two or more alphanumeric characters or hyphens. This allows for subdomains and top-level domains like .com, .net, etc. but .ru is banned"
                   },
                   "password": {
                     "type": "string",
                     "example": "paSsword123",
-                    "description": "Must contain at least one uppercase letter (?=.*[A-Z]) one lowercase letter (?=.*[a-z]) between 8 and 16 characters in length [A-Za-z\\d]{8,16} Only allows alphanumeric characters [A-Za-z\\d]"
+                    "description": "\n 1. between 8 and 16 characters in length, Only allows alphanumeric characters \n 3. at least one uppercase letter  \n 4. one lowercase letter"
                   },
                   "firstName": {
                     "type": "string",
-                    "example": "John"
+                    "example": "John",
+                    "description": "(min 1 max 30)\n 1. Lowercase or uppercase English letters (a-z, A-Z)\n2. Lowercase or uppercase Cyrillic letters (including Ukrainian-specific ones: а-я, А-Я, і, І, ї, Ї, є, Є, ґ, Ґ)\n3. An apostrophe allowed (')\n4. A space allowed ( )\n5. Optionally, the string can have a hyphen (-) followed by one or more characters that follow the same rules as above. This is useful for validating names that contain a hyphen, like 'Anne-Marie' or 'Jean-Pierre'"
                   },
                   "lastName": {
                     "type": "string",
-                    "example": "Doe"
+                    "example": "Doe",
+                    "description": "(min 1 max 30)\n 1. Lowercase or uppercase English letters (a-z, A-Z)\n2. Lowercase or uppercase Cyrillic letters (including Ukrainian-specific ones: а-я, А-Я, і, І, ї, Ї, є, Є, ґ, Ґ)\n3. An apostrophe allowed (')\n4. A space allowed ( )\n5. Optionally, the string can have a hyphen (-) followed by one or more characters that follow the same rules as above. This is useful for validating names that contain a hyphen, like 'Anne-Marie' or 'Jean-Pierre'"
                   }
                 }
               }
@@ -1170,22 +1174,32 @@
                 "properties": {
                   "avatar": {
                     "type": "string",
-                    "format": "binary"
+                    "format": "binary",
+                    "description": "Image file loaded as a binary string"
                   },
                   "firstName": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "John",
+                    "description": "(min 1 max 30)\n 1. Lowercase or uppercase English letters (a-z, A-Z)\n2. Lowercase or uppercase Cyrillic letters (including Ukrainian-specific ones: а-я, А-Я, і, І, ї, Ї, є, Є, ґ, Ґ)\n3. An apostrophe allowed (')\n4. A space allowed ( )\n5. Optionally, the string can have a hyphen (-) followed by one or more characters that follow the same rules as above. This is useful for validating names that contain a hyphen, like 'Anne-Marie' or 'Jean-Pierre'"
                   },
                   "lastName": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Doe",
+                    "description": "(min 1 max 30)\n 1. Lowercase or uppercase English letters (a-z, A-Z)\n2. Lowercase or uppercase Cyrillic letters (including Ukrainian-specific ones: а-я, А-Я, і, І, ї, Ї, є, Є, ґ, Ґ)\n3. An apostrophe allowed (')\n4. A space allowed ( )\n5. Optionally, the string can have a hyphen (-) followed by one or more characters that follow the same rules as above. This is useful for validating names that contain a hyphen, like 'Anne-Marie' or 'Jean-Pierre'"
                   },
                   "phone": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Start with a plus symbol, followed by 9 to 20 digits. It's suitable for validating phone numbers in international format (like +1234567890)."
                   },
                   "password": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "paSsword123",
+                    "description": "\n 1. between 8 and 16 characters in length, Only allows alphanumeric characters \n 3. at least one uppercase letter  \n 4. one lowercase letter"
                   },
                   "email": {
-                    "type": "string"
+                    "type": "string",
+                    "format": "email",
+                    "description": "1. The local part (before the @ symbol) can contain one or more alphanumeric characters, as well as the special characters . ! # $ % & ' * + / = ? ^ _ ` { | } ~ -.,\n2. The @ symbol is required. \n3. The domain part (after the @ symbol and before the dot) can contain one or more alphanumeric characters, as well as the hyphen (-). \n4. The top-level domain (after the dot) can contain two or more alphanumeric characters or hyphens. This allows for subdomains and top-level domains like .com, .net, etc. but .ru is banned"
                   }
                 }
               }
@@ -1242,7 +1256,9 @@
                 "type": "object",
                 "properties": {
                   "email": {
-                    "type": "string"
+                    "type": "string",
+                    "format": "email",
+                    "description": "1. The local part (before the @ symbol) can contain one or more alphanumeric characters, as well as the special characters . ! # $ % & ' * + / = ? ^ _ ` { | } ~ -.,\n2. The @ symbol is required. \n3. The domain part (after the @ symbol and before the dot) can contain one or more alphanumeric characters, as well as the hyphen (-). \n4. The top-level domain (after the dot) can contain two or more alphanumeric characters or hyphens. This allows for subdomains and top-level domains like .com, .net, etc. but .ru is banned"
                   }
                 }
               }
@@ -1343,19 +1359,22 @@
                 "properties": {
                   "cardNumber": {
                     "type": "string",
-                    "example": "4111111111111113"
+                    "example": "4111111111111113",
+                    "description": "16 digits card number, without spaces and dashes"
                   },
                   "cardName": {
                     "type": "string",
-                    "example": "John Doe"
+                    "example": "John Doe",
+                    "description": "Full name of the cardholder min 1 max 60 characters"
                   },
                   "cardDate": {
                     "type": "string",
-                    "example": "2024-12"
+                    "description": "Expiration date of the card in the format MM-YYYY"
                   },
                   "cardCVC": {
                     "type": "string",
-                    "example": "123"
+                    "example": "123",
+                    "description": "3 digits CVC or CVV code"
                   }
                 }
               }
@@ -1478,17 +1497,23 @@
                 "properties": {
                   "name": {
                     "type": "string",
-                    "example": "Лірой Дженкінс"
+                    "example": "Лірой Дженкінс",
+                    "description": "(min 1 max 60)\n1. Lowercase or uppercase English letters (a-z, A-Z)\n2. Lowercase or uppercase Cyrillic letters (including Ukrainian-specific ones: а-я, А-Я, і, І, ї, Ї, є, Є, ґ, Ґ)\n3. An apostrophe allowed (')\n4. A space allowed ( )\n5. Optionally, the string can have a hyphen (-) followed by one or more characters that follow the same rules as above. This is useful for validating names that contain a hyphen, like 'Anne-Marie' or 'Jean-Pierre'"
                   },
                   "email": {
                     "type": "string",
-                    "example": "example@gmail.com "
+                    "example": "example@gmail.com",
+                    "format": "email",
+                    "description": "1. The local part (before the @ symbol) can contain one or more alphanumeric characters, as well as the special characters . ! # $ % & ' * + / = ? ^ _ ` { | } ~ -.,\n2. The @ symbol is required. \n3. The domain part (after the @ symbol and before the dot) can contain one or more alphanumeric characters, as well as the hyphen (-). \n4. The top-level domain (after the dot) can contain two or more alphanumeric characters or hyphens. This allows for subdomains and top-level domains like .com, .net, etc. but .ru is banned"
                   },
                   "subject": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Проблема з оплатою",
+                    "description": "any characters, min 1 max 50"
                   },
                   "message": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "any characters, min 1 max 500"
                   }
                 }
               }
@@ -1528,7 +1553,9 @@
                 "type": "object",
                 "properties": {
                   "email": {
-                    "type": "string"
+                    "type": "string",
+                    "format": "email",
+                    "description": "1. The local part (before the @ symbol) can contain one or more alphanumeric characters, as well as the special characters . ! # $ % & ' * + / = ? ^ _ ` { | } ~ -.,\n2. The @ symbol is required. \n3. The domain part (after the @ symbol and before the dot) can contain one or more alphanumeric characters, as well as the hyphen (-). \n4. The top-level domain (after the dot) can contain two or more alphanumeric characters or hyphens. This allows for subdomains and top-level domains like .com, .net, etc. but .ru is banned"
                   }
                 }
               }
@@ -1714,10 +1741,9 @@
                 "type": "object",
                 "properties": {
                   "password": {
-                    "type": "string"
-                  },
-                  "token": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "paSsword123",
+                    "description": "\n 1. between 8 and 16 characters in length, Only allows alphanumeric characters \n 3. at least one uppercase letter  \n 4. one lowercase letter"
                   }
                 }
               }
