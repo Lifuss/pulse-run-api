@@ -36,10 +36,10 @@ const googleCallback = async (
       email,
       password,
       profile: {
-        firstName: name.givenName,
-        lastName: name.familyName,
+        firstName: name.givenName || '',
+        lastName: name.familyName || '',
       },
-      avatar: picture,
+      avatar: picture || '',
       token: verifyToken,
     });
     done(null, newUser);
