@@ -11,12 +11,18 @@ const resetPassword = async (req: Request, res: Response) => {
     resetPasswordToken: resetToken,
     resetPasswordExpires: { $gt: new Date() },
   });
+  
 
   if (!user) {
     res.status(400).json({ message: 'Invalid or expired token' });
     return;
   }
-
+  
+  const comparePasswords = await bcrypt.compare(password, user.password);
+  if (comparePasswords) {
+    res.status(400).json({ message: 'Password cannot be the same' });
+    return;
+  }
   const hashedPassword = await bcrypt.hash(password, 5);
 
   user.password = hashedPassword;

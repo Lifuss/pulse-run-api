@@ -13,7 +13,7 @@ export const schemaSignup = Joi.object({
   password: Joi.string()
     .min(8)
     .max(16)
-    .regex(/^(?=.*[A-Z])(?=.*[a-z])[A-Za-z\d]{8,16}$/)
+    .regex(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[!$#@])[A-Za-z\d!$#@]{8,16}$/)
     .required(),
   firstName: Joi.string().regex(nameRegex).min(1).max(30).required(),
   lastName: Joi.string().regex(nameRegex).min(1).max(30).required(),
@@ -29,7 +29,7 @@ export const schemaSignIn = Joi.object({
   password: Joi.string()
     .min(8)
     .max(16)
-    .regex(/^(?=.*[A-Z])(?=.*[a-z])[A-Za-z\d]{8,16}$/)
+    .regex(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[!$#@])[A-Za-z\d!$#@]{8,16}$/)
     .required(),
 });
 
@@ -67,7 +67,7 @@ export const schemaUpdateUser = Joi.object({
   password: Joi.string()
     .min(8)
     .max(16)
-    .regex(/^(?=.*[A-Z])(?=.*[a-z])[A-Za-z\d]{8,16}$/),
+    .regex(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[!$#@])[A-Za-z\d!$#@]{8,16}$/),
   firstName: Joi.string().regex(nameRegex).min(1).max(30),
   lastName: Joi.string().regex(nameRegex).min(1).max(30),
   phone: Joi.string().regex(/^\+\d{9,20}$/),
