@@ -8,6 +8,29 @@ dotenv.config();
 
 const { FRONTEND_URL } = process.env;
 
+const htmlEmail = `
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Thank you for subscribing</title>
+</head>
+<body style="font-family: Arial, sans-serif;">
+    <div style="width: 80%; margin: auto;">
+        <div style="text-align: center; padding: 20px; background-color: #f8f9fa;">
+            <h1>Thank you for subscribing!</h1>
+        </div>
+        <div style="margin: 20px;">
+            <p>We appreciate your interest in our newsletter. As a token of our gratitude, please use the following promo code to get a 10% discount on your next purchase:</p>
+            <h2>PROMO CODE: SUBSCRIBE</h2>
+        </div>
+        <div style="text-align: center; padding: 20px; background-color: #f8f9fa;">
+            <a href="${FRONTEND_URL}">Visit our website</a>
+        </div>
+    </div>
+</body>
+</html>
+`;
+
 const subscribeEmail = async (req: Request, res: Response) => {
   const { email } = req.body;
 
@@ -16,8 +39,8 @@ const subscribeEmail = async (req: Request, res: Response) => {
   if (!existEmail) {
     const mail = {
       to: email,
-      subject: 'Subscribed and got discount on our products!',
-      html: `<h1>You have subscribed to our newsletter and got 10% of discount</h1><a href=${FRONTEND_URL}>Go to our website</a>`,
+      subject: 'Thank you for subscribing!',
+      html: htmlEmail
     };
     await sendEmail(mail);
 
