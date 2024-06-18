@@ -97,7 +97,7 @@ export const schemaSupport = Joi.object({
 
 export const schemaPayment = Joi.object({
   cardNumber: Joi.string()
-    .regex(/^\d{16}$/)
+    .regex(/^(4|5)\d{15}$/)
     .required(),
   cardName: Joi.string()
     .regex(/^[A-Za-z ]+$/)
