@@ -5,10 +5,13 @@ import User from '../../models/user';
 import ctrlWrapper from '../../utils/ctrlWrapper';
 import PromoCode from '../../models/promoCodes';
 import Mailing from '../../models/mailing';
+import jwt from 'jsonwebtoken';
 // import { Types } from 'mongoose';
 
 const createOrder = async (req: Request, res: Response) => {
   const orderBody = req.body as TOrder;
+  const { authorization = '' } = req.headers;
+  const [bearer, token] = authorization.split(' ');
 
   if (orderBody.promoCode && !orderBody.userId) {
     res
@@ -60,10 +63,16 @@ const createOrder = async (req: Request, res: Response) => {
       .status(500)
       .json({ message: 'Order creation failed, order was not created' });
   }
-  if (orderBody.userId) {
-    await User.findByIdAndUpdate(orderBody.userId, {
-      $push: { buyHistory: order._id },
-    });
+
+  if (token) {
+    const secretKey: string = process.env.JWT_SECRET || 'default_secret';
+    const { id } = jwt.verify(token, secretKey) as { id: string };
+    const user = await User.findById(id);
+    if (user) {
+      await User.findByIdAndUpdate(orderBody.userId, {
+        $push: { buyHistory: order._id },
+      });
+    }
   }
 
   res.status(201).json(order);
