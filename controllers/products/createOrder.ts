@@ -13,12 +13,12 @@ const createOrder = async (req: Request, res: Response) => {
   const { authorization = '' } = req.headers;
   const [bearer, token] = authorization.split(' ');
 
-  if (orderBody.promoCode && !orderBody.userId) {
-    res
-      .status(400)
-      .json({ message: 'You need to be logged in to use promo code' });
-    return;
-  }
+  // if (orderBody.promoCode && !orderBody.userId) {
+  //   res
+  //     .status(400)
+  //     .json({ message: 'You need to be logged in to use promo code' });
+  //   return;
+  // }
 
   // Check promo code validation if successful user adds to usedBy array for next iterations of checking
   if (orderBody.promoCode && orderBody.userId) {
@@ -51,13 +51,24 @@ const createOrder = async (req: Request, res: Response) => {
     orderBody.promoCode = promoCodeDoc._id;
   }
   if (orderBody.isMailing) {
-    await Mailing.create({
-      email: orderBody.email,
-      name: orderBody.name,
-    });
+    const checkEmail = await Mailing.find({ email: orderBody.email });
+
+    if (checkEmail) {
+      await Mailing.findOneAndUpdate(
+        { email: orderBody.email },
+        { $set: { name: orderBody.name } },
+      );
+    } else {
+      await Mailing.create({
+        email: orderBody.email,
+        name: orderBody.name,
+      });
+    }
   }
 
-  const order = await Order.create(orderBody);
+  const { isMailing, ...orderBodyWithoutMailing } = orderBody;
+
+  const order = await Order.create(orderBodyWithoutMailing);
   if (!order) {
     res
       .status(500)

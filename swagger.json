@@ -822,9 +822,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "userId": {
-                    "type": "string"
-                  },
                   "products": {
                     "type": "array",
                     "items": {
@@ -862,16 +859,15 @@
                   "deliveryAddress": {
                     "type": "string"
                   },
-                  "deliveryDate": {
-                    "type": "string",
-                    "format": "date-time"
-                  },
                   "paymentMethod": {
                     "type": "string",
                     "enum": ["card", "cash"]
                   },
                   "promoCode": {
                     "type": "string"
+                  },
+                  "discount": {
+                    "type": "number"
                   },
                   "email": {
                     "type": "string",
