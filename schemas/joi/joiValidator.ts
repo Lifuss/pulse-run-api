@@ -107,7 +107,7 @@ export const orderJoiSchema = Joi.object({
       sizeId: Joi.string().required().error(new Error('sizeId is required')),
     }),
   ),
-  priceSum: Joi.number().required().error(new Error('Final price is required')),
+  priceSum: Joi.number().required(),
   orderDate: Joi.date().default(Date.now),
   deliveryAddress: Joi.string()
     .required()

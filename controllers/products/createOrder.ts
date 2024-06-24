@@ -11,17 +11,10 @@ import jwt from 'jsonwebtoken';
 const createOrder = async (req: Request, res: Response) => {
   const orderBody = req.body as TOrder;
   const { authorization = '' } = req.headers;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [bearer, token] = authorization.split(' ');
 
-  // if (orderBody.promoCode && !orderBody.userId) {
-  //   res
-  //     .status(400)
-  //     .json({ message: 'You need to be logged in to use promo code' });
-  //   return;
-  // }
-
-  // Check promo code validation if successful user adds to usedBy array for next iterations of checking
-  if (orderBody.promoCode && orderBody.userId) {
+  if (orderBody.promoCode) {
     const promoCodeDoc = await PromoCode.findOne({
       code: orderBody.promoCode,
     });
@@ -40,14 +33,6 @@ const createOrder = async (req: Request, res: Response) => {
       return;
     }
 
-    // Simplify the code by removing the check for the user for development purposes
-    // if (promoCodeDoc.usedBy.includes(new Types.ObjectId(orderBody.userId))) {
-    //   res.status(400).json({ message: 'Promo code is already used' });
-    //   return;
-    // }
-    // await PromoCode.findByIdAndUpdate(promoCodeDoc._id, {
-    //   $push: { usedBy: orderBody.userId },
-    // });
     orderBody.promoCode = promoCodeDoc._id;
   }
   if (orderBody.isMailing) {
@@ -66,6 +51,7 @@ const createOrder = async (req: Request, res: Response) => {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { isMailing, ...orderBodyWithoutMailing } = orderBody;
 
   const order = await Order.create(orderBodyWithoutMailing);
@@ -80,7 +66,7 @@ const createOrder = async (req: Request, res: Response) => {
     const { id } = jwt.verify(token, secretKey) as { id: string };
     const user = await User.findById(id);
     if (user) {
-      await User.findByIdAndUpdate(orderBody.userId, {
+      await User.findByIdAndUpdate(id, {
         $push: { buyHistory: order._id },
       });
     }
