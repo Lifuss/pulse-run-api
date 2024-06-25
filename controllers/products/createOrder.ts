@@ -12,7 +12,7 @@ const createOrder = async (req: Request, res: Response) => {
   const orderBody = req.body as TOrder;
   const { authorization = '' } = req.headers;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [bearer, token] = authorization.split(' ');
+  const [, token] = authorization.split(' ');
 
   if (orderBody.promoCode) {
     const promoCodeDoc = await PromoCode.findOne({

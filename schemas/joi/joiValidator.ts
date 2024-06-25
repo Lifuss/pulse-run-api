@@ -5,6 +5,7 @@ const nameRegex = /^[A-Za-zа-яА-ЯіІїЇєЄґҐ']+(-[A-Za-zа-яА-ЯіІ�
 const emailRegex =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]{1,64}@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]{2,})*$/;
 const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z0-9!$#@])[A-Za-z\d!$#@]{8,20}$/;
+const phoneRegex = /^\+\d{9,20}$/;
 
 export const schemaSignup = Joi.object({
   email: Joi.string()
@@ -55,7 +56,7 @@ export const schemaUpdateUser = Joi.object({
   password: Joi.string().min(8).max(16).regex(passwordRegex),
   firstName: Joi.string().regex(nameRegex).min(1).max(30),
   lastName: Joi.string().regex(nameRegex).min(1).max(30),
-  phone: Joi.string().regex(/^\+\d{9,20}$/),
+  phone: Joi.string().regex(phoneRegex),
 });
 
 export const schemaSupport = Joi.object({
@@ -119,10 +120,7 @@ export const orderJoiSchema = Joi.object({
   promoCode: Joi.string(),
   discount: Joi.number(),
   email: Joi.string().email().required().error(new Error('Email is required')),
-  phone: Joi.string()
-    .pattern(/^[0-9]+$/)
-    .required()
-    .error(new Error('Phone is required')),
+  phone: Joi.string().regex(phoneRegex),
   name: Joi.string().required().error(new Error('Name is required')),
   isMailing: Joi.boolean().default(false),
 });

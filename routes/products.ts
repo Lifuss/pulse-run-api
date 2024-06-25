@@ -35,7 +35,6 @@ router.post(
 );
 router.get('/orders', authentication, getOrderHistory);
 router.get('/orders/:code', checkPromoCode);
-// router.get('/orders/:code', authentication, checkPromoCode);
 router.get('/newest', getNewProducts);
 router.get('/sales', getProductsOnSale);
 router.get('/search', getSearchProducts);
