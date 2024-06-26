@@ -23,7 +23,9 @@ const getNewest = async (req: Request, res: Response) => {
     return;
   }
 
-  const query: FilterQuery<typeof Product> = {};
+  const query: FilterQuery<typeof Product> = {
+    isNewProduct: true,
+  };
 
   if (brand) {
     const brandValues = brand.split(',');
@@ -57,7 +59,7 @@ const getNewest = async (req: Request, res: Response) => {
 
   const totalDoc = await Product.countDocuments(query as Partial<Query>);
   const totalPages = Math.ceil(totalDoc / +limit);
-  
+
   res.json({ page: +page, limit: +limit, totalPages, products });
 };
 

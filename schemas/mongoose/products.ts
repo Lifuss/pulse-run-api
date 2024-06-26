@@ -7,6 +7,7 @@ export const productSchema = new Schema(
     price: Number,
     basePrice: Number,
     sale: { type: Number, default: 0 },
+    isNewProduct: { type: Boolean, default: false },
     description: String,
     imgThumbnail: String,
     article: { type: String, default: 'DF0001' },
