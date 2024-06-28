@@ -5,7 +5,7 @@ const nameRegex = /^[A-Za-zа-яА-ЯіІїЇєЄґҐ']+(-[A-Za-zа-яА-ЯіІ�
 const emailRegex =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]{1,64}@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]{2,})*$/;
 const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z0-9!$#@])[A-Za-z\d!$#@]{8,20}$/;
-const phoneRegex = /^\+\d{9,20}$/;
+const phoneRegex = /^\+\d{12,20}$/;
 
 export const schemaSignup = Joi.object({
   email: Joi.string()
@@ -106,7 +106,7 @@ export const orderJoiSchema = Joi.object({
         .required()
         .error(new Error('Price by one is required')),
       sizeId: Joi.string().required().error(new Error('sizeId is required')),
-    }),
+    })
   ),
   priceSum: Joi.number().required(),
   orderDate: Joi.date().default(Date.now),

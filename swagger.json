@@ -875,7 +875,7 @@
                   },
                   "phone": {
                     "type": "string",
-                    "pattern": "^\\+?3?8?(0\\d{9})$"
+                    "pattern": "/^+d{12,20}$/"
                   },
                   "name": {
                     "type": "string"
@@ -966,7 +966,7 @@
                     },
                     "phone": {
                       "type": "string",
-                      "pattern": "^\\+?3?8?(0\\d{9})$"
+                      "pattern": "^/^+d{12,20}$/"
                     },
                     "name": {
                       "type": "string"
@@ -1185,7 +1185,7 @@
                   },
                   "phone": {
                     "type": "string",
-                    "description": "Start with a plus symbol, followed by 9 to 20 digits. It's suitable for validating phone numbers in international format (like +1234567890)."
+                    "description": "Start with a plus symbol, followed by 12 to 20 digits. It's suitable for validating phone numbers in international format (like +1234567890)."
                   },
                   "password": {
                     "type": "string",
