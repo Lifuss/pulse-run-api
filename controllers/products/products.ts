@@ -53,22 +53,27 @@ const products = async (req: Request, res: Response) => {
     .populate('categories.brand')
     .populate('categories.color')
     .populate('categories.size')
-    .sort({ [sort]: order as 'asc' | 'desc' });
-  
+    .sort({ [sort]: order as 'asc' | 'desc' })
+    .lean();
+
   const normalizedProducts = products.map((product) => {
     if (product.sale && product.price) {
       return {
-      ...product,
-      price: Math.ceil(product.price)
-    };
+        ...product,
+        price: Math.ceil(product.price),
+      };
     }
     return product;
-  }
-  );
+  });
 
   const totalDoc = await Product.countDocuments(query as Partial<Query>);
   const totalPages = Math.ceil(totalDoc / +limit);
-  res.json({ page: +page, limit: +limit, totalPages, products: normalizedProducts });
+  res.json({
+    page: +page,
+    limit: +limit,
+    totalPages,
+    products: normalizedProducts,
+  });
 };
 
 export default ctrlWrapper(products);
