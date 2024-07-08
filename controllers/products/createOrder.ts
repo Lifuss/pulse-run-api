@@ -6,12 +6,10 @@ import ctrlWrapper from '../../utils/ctrlWrapper';
 import PromoCode from '../../models/promoCodes';
 import Mailing from '../../models/mailing';
 import jwt from 'jsonwebtoken';
-// import { Types } from 'mongoose';
 
 const createOrder = async (req: Request, res: Response) => {
   const orderBody = req.body as TOrder;
   const { authorization = '' } = req.headers;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [, token] = authorization.split(' ');
 
   if (orderBody.promoCode) {
