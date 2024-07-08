@@ -16,7 +16,7 @@ export const orderSchema = new Schema(
     deliveryAddress: { type: String, required: true },
     paymentMethod: { type: String, required: true },
     status: { type: String, default: 'pending' },
-    promoCode: { type: Schema.Types.ObjectId, ref: 'PromoCode' },
+    promoCode: { type: Schema.Types.ObjectId, ref: 'PromoCode', default: null },
     discount: { type: Number },
     email: { type: String },
     phone: { type: String },

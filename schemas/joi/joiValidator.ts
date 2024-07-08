@@ -104,7 +104,7 @@ export const orderJoiSchema = Joi.object({
         .required()
         .error(new Error('Price by one is required')),
       sizeId: Joi.string().required().error(new Error('sizeId is required')),
-    })
+    }),
   ),
   priceSum: Joi.number().required(),
   orderDate: Joi.date().default(Date.now),
@@ -115,7 +115,7 @@ export const orderJoiSchema = Joi.object({
     .valid('card', 'cash')
     .required()
     .error(new Error('Payment method is required')),
-  promoCode: Joi.string(),
+  promoCode: Joi.string().optional(),
   discount: Joi.number(),
   email: Joi.string().email().required().error(new Error('Email is required')),
   phone: Joi.string().regex(phoneRegex),
