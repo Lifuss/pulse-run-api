@@ -8,10 +8,9 @@ const getOrderHistory = async (req: Request, res: Response) => {
 
   const userBuyHistory = await User.findById(_id, '-_id buyHistory').populate({
     path: 'buyHistory',
-    select: 'products orderDate status priceSum',
     populate: {
-      path: 'products.productId',
-      select: 'name imgThumbnail',
+      path: 'products.productId products.sizeId',
+      select: 'name imgThumbnail value',
     },
   });
 
