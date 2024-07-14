@@ -1,17 +1,13 @@
 import Joi from 'joi';
 
-const nameRegex = /^[A-Za-zа-яА-ЯіІїЇєЄґҐ']+(-[A-Za-zа-яА-ЯіІїЇєЄґҐ']+)?$/;
+const nameRegex = /^[A-Za-zа-яА-ЯіІїЇєЄґҐ' ]+(-[A-Za-zа-яА-ЯіІїЇєЄґҐ']+)?$/;
 const emailRegex =
-  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]{1,64}@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]{2,})*$/;
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]{1,64}@[a-zA-Z0-9-_]+(?:\.[a-zA-Z0-9-_]{2,})*$/;
 const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z\d\S]).{8,20}$/;
 const phoneRegex = /^\+\d{12,20}$/;
 
 export const schemaSignup = Joi.object({
-  email: Joi.string()
-    .regex(emailRegex)
-    .email({ minDomainSegments: 2, tlds: { deny: ['ru'] } })
-    .max(64)
-    .required(),
+  email: Joi.string().regex(emailRegex).max(64).required(),
   password: Joi.string().min(8).max(20).regex(passwordRegex).required(),
   firstName: Joi.string().regex(nameRegex).min(1).max(30).required(),
   lastName: Joi.string().regex(nameRegex).min(1).max(30).required(),
