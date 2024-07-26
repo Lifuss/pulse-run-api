@@ -32,6 +32,8 @@ const createOrder = async (req: Request, res: Response) => {
     }
 
     orderBody.promoCode = promoCodeDoc._id;
+  } else {
+    delete orderBody.promoCode;
   }
   if (orderBody.isMailing) {
     const checkEmail = await Mailing.find({ email: orderBody.email });

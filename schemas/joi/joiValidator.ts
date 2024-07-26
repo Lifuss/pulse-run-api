@@ -111,7 +111,7 @@ export const orderJoiSchema = Joi.object({
     .valid('card', 'cash')
     .required()
     .error(new Error('Payment method is required')),
-  promoCode: Joi.string().optional(),
+  promoCode: Joi.string().allow('').default(null),
   discount: Joi.number(),
   email: Joi.string().email().required().error(new Error('Email is required')),
   phone: Joi.string().regex(phoneRegex),
