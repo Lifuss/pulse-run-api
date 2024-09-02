@@ -121,7 +121,7 @@ export const orderJoiSchema = Joi.object({
     .email({ minDomainSegments: 2, tlds: { deny: ['ru'] } })
     .required(),
   phone: Joi.string().regex(phoneRegex),
-  name: Joi.string().regex(nameRegex).min(2).max(60).required(),
+  name: Joi.string().regex(nameRegex).min(2).max(120).required(),
   isMailing: Joi.boolean().default(false),
 });
 
