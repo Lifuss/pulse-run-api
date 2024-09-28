@@ -8,18 +8,30 @@ const getSearchProducts = async (req: Request, res: Response) => {
 
   if (!name) {
     requestError(400, 'Name is required!');
+    return;
   }
 
-  const products = await Product.find({ name: new RegExp(String(name), 'i') })
+  const nameParts = String(name).trim().split(/\s+/).filter(Boolean);
+
+  if (nameParts.length === 0) {
+    requestError(400, 'Invalid search query!');
+    return;
+  }
+
+  const searchQuery = {
+    $and: nameParts.map((part) => ({
+      name: { $regex: part, $options: 'i' },
+    })),
+  };
+
+  const products = await Product.find(searchQuery)
     .limit(Number(limit))
     .skip(Number(limit) * (Number(page) - 1));
 
-  const totalDoc = await Product.countDocuments({
-    name: new RegExp(String(name), 'i'),
-  });
-  const totalPages = Math.ceil(totalDoc / +limit);
+  const totalDoc = await Product.countDocuments(searchQuery);
+  const totalPages = Math.ceil(totalDoc / Number(limit));
 
-res.json({ page: +page, limit: +limit, totalPages, products });
+  res.json({ page: Number(page), limit: Number(limit), totalPages, products });
 };
 
 export default ctrlWrapper(getSearchProducts);
