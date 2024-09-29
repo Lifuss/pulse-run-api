@@ -54,7 +54,7 @@ const updateUser = async (req: CustomRequest, res: Response) => {
       ...oldProfile,
       ...(firstName && { firstName }),
       ...(lastName && { lastName }),
-      ...(phone && { phone }),
+      ...(phone ? { phone } : { phone: '' }),
     },
   };
   if (password) {
