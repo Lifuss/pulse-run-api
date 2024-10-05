@@ -1,6 +1,5 @@
 import Joi from 'joi';
-
-const nameRegex = /^[A-Za-zа-яА-ЯіІїЇєЄґҐ' ]+(-[A-Za-zа-яА-ЯіІїЇєЄґҐ']+)?$/;
+const nameRegex = /^([A-Za-zа-яА-ЯіІїЇєЄґҐ' ]+(-[A-Za-zа-яА-ЯіІїЇєЄґҐ']+)?)+$/;
 const emailRegex =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]{1,64}@[a-zA-Z0-9._%-]+(?:\.[a-zA-Z0-9-_]{2,})*$/;
 const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z\d\S]).{8,20}$/;
